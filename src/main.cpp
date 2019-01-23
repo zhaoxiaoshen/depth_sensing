@@ -136,9 +136,56 @@ std::string getTime(void)
     return time_str;
 }
 
+std::vector<detectInfoSt> detectInfoVec;
+std::vector<zedImage*> zedProcessorVec;
 
-zedImage zedProcessor;
-detectInfoSt detectInfo;
+static void cameraProcess(int cameraIndex)
+{
+    detectInfoSt detectInfo;
+    zedImage* zedProcessor;
+    detectInfo = detectInfoVec[cameraIndex];
+    zedProcessor = zedProcessorVec[cameraIndex];
+    printf("camera running index %d\n", cameraIndex);
+    cv::Mat image, imageR;
+    sl::float4 pointResult;
+    pointResult.x = 0;
+    pointResult.y = 0;
+    pointResult.z = 0;
+    if (zedProcessor->zedImageGet(image, VIEW_LEFT))
+    {
+        printf("can not read image \n");
+        return;
+    }
+    if (!image.empty())
+    {
+        image.copyTo(imageR);
+    }
+    else
+        return;
+    std::vector<cv::Mat> imgPro;
+
+    printf("image match begin \n");
+    zedProcessor->zed_match(imgPro);
+    zedProcessor->measure(pointResult, imageR);
+
+    cv::cvtColor(imageR, imageR, CV_BGR2GRAY);
+    printf("image size cols %d rows %d\n", imageR.cols, imageR.rows);
+
+    //cv::imshow("src_image1", imageR);
+
+    //cv::waitKey(5);
+    cv::imwrite("src_image.jpg", imageR);
+
+    /*       if (imgPro.size() >= 4)
+        {
+            imshow("result1", imgPro[1]);
+            imshow("result2", imgPro[2]);
+            imshow("result3", imgPro[3]);
+        }
+*/
+    printf("%s point cloud: x %f  y %f  z %f \n", getTime().c_str(), pointResult.x, pointResult.y, pointResult.z);
+    sl::sleep_ms(10);
+}
 
 int main(int argc, char **argv)
 {
@@ -160,6 +207,7 @@ int main(int argc, char **argv)
 
     for (int i = 0; i < cameraNum; i++)
     {
+        detectInfoSt detectInfo;
         char path[255] = {0};
         snprintf(path, sizeof(path) - 1, "Config_%d.ini", i);
         if (iniFile.OpenFile(path) != INI_SUCCESS)
@@ -170,61 +218,28 @@ int main(int argc, char **argv)
         else
         {
             configInit(detectInfo, iniFile);
+            detectInfoVec.push_back(detectInfo);
         }
+        zedImage* zedProcessor = new zedImage();
+        zedProcessor->templateImageLoad(detectInfo.templatePath);
+        cameraOpen(*zedProcessor, detectInfo); //"" for live
+        zedProcessorVec.push_back(zedProcessor);
     }
     //return 0;
 
     // windowInit();
     plcConnect(plcIp);
 
-    zedProcessor.templateImageLoad(detectInfo.templatePath);
-    cameraOpen(zedProcessor,detectInfo); //"" for live
-    
+
     quit = false;
     while (1)
     {
         while (!quit)
         {
-            printf("camera running \n");
-            cv::Mat image, imageR;
-            sl::float4 pointResult;
-            pointResult.x = 0;
-            pointResult.y = 0;
-            pointResult.z = 0;
-            if (zedProcessor.zedImageGet(image, VIEW_LEFT))
+            for (int i = 0; i < cameraNum; i++)
             {
-                printf("can not read image \n");
-                continue;
+                cameraProcess(i);
             }
-            if (!image.empty())
-            {
-                image.copyTo(imageR);
-            }
-            else
-                continue;
-            std::vector<cv::Mat> imgPro;
-
-            printf("image match begin \n");
-            zedProcessor.zed_match(imgPro);
-            zedProcessor.measure(pointResult, imageR);
-
-            cv::cvtColor(imageR, imageR, CV_BGR2GRAY);
-            printf("image size cols %d rows %d\n", imageR.cols, imageR.rows);
-
-            //cv::imshow("src_image1", imageR);
-
-            //cv::waitKey(5);
-            cv::imwrite("src_image.jpg", imageR);
-
-            /*       if (imgPro.size() >= 4)
-        {
-            imshow("result1", imgPro[1]);
-            imshow("result2", imgPro[2]);
-            imshow("result3", imgPro[3]);
-        }
-*/
-            printf("%s point cloud: x %f  y %f  z %f \n",getTime().c_str(), pointResult.x, pointResult.y, pointResult.z);
-            sl::sleep_ms(10);
         }
     }
 
@@ -265,43 +280,36 @@ void *run(void *arg)
 
     while (!quit)
     {
-        printf("camera running \n");
-        cv::Mat image, imageR;
-        sl::float4 pointResult;
-        pointResult.x = 0;
-        pointResult.y = 0;
-        pointResult.z = 0;
-        if (zedProcessor.zedImageGet(image, VIEW_LEFT))
-        {
-            printf("can not read image \n");
-            continue;
-        }
-        if (!image.empty())
-        {
-            image.copyTo(imageR);
-        }
-        else
-            continue;
-        std::vector<cv::Mat> imgPro;
-        printf("image match begin \n");
-        zedProcessor.zed_match(imgPro);
-        zedProcessor.measure(pointResult, imageR);
+        // printf("camera running \n");
+        // cv::Mat image, imageR;
+        // sl::float4 pointResult;
+        // pointResult.x = 0;
+        // pointResult.y = 0;
+        // pointResult.z = 0;
+        // if (zedProcessor.zedImageGet(image, VIEW_LEFT))
+        // {
+        //     printf("can not read image \n");
+        //     continue;
+        // }
+        // if (!image.empty())
+        // {
+        //     image.copyTo(imageR);
+        // }
+        // else
+        //     continue;
+        // std::vector<cv::Mat> imgPro;
+        // printf("image match begin \n");
+        // zedProcessor.zed_match(imgPro);
+        // zedProcessor.measure(pointResult, imageR);
 
-        cv::cvtColor(imageR, imageR, CV_BGR2GRAY);
-        printf("image size cols %d rows %d\n", imageR.cols, imageR.rows);
+        // cv::cvtColor(imageR, imageR, CV_BGR2GRAY);
+        // printf("image size cols %d rows %d\n", imageR.cols, imageR.rows);
 
-        cv::imshow("src_image1", imageR);
-        cv::waitKey(5);
-        cv::imwrite("src_image.jpg", imageR);
+        // cv::imshow("src_image1", imageR);
+        // cv::waitKey(5);
+        // cv::imwrite("src_image.jpg", imageR);
 
-        /*       if (imgPro.size() >= 4)
-        {
-            imshow("result1", imgPro[1]);
-            imshow("result2", imgPro[2]);
-            imshow("result3", imgPro[3]);
-        }
-*/
-        printf("point cloud: x %f  y %f  z %f \n", pointResult.x, pointResult.y, pointResult.z);
+        // printf("point cloud: x %f  y %f  z %f \n", pointResult.x, pointResult.y, pointResult.z);
         sl::sleep_ms(10);
     }
 }

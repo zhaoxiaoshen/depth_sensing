@@ -29,6 +29,7 @@ int  zedImage::zedOpen(InitParameters initParameters)
 	ERROR_CODE err = zed.open(initParameters);
 	if (err != SUCCESS)
 	{
+		printf("zed open error:%s\n", toString(err).c_str());
 		zed.close();
 		return 1;
 	}
@@ -38,6 +39,12 @@ int  zedImage::zedOpen(InitParameters initParameters)
 	nb_frames = zed.getSVONumberOfFrames();
 	svo_positoion = 0;
 
+	return 0;
+}
+
+int  zedImage::zedClose()
+{
+	zed.close();
 	return 0;
 }
 int zedImage::zedImageGet(cv::Mat& image, int type)

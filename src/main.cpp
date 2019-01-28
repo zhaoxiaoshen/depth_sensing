@@ -26,6 +26,7 @@
 // Standard includes
 #include <stdio.h>
 #include <string.h>
+#include <sys/time.h>
 #include <pthread.h>
 #include <opencv2/opencv.hpp>
 // ZED includes
@@ -85,6 +86,7 @@ void close();
 
 void windowInit();
 void cameraOpen(zedImage& processor, detectInfoSt detectInfo);
+void cameraClose();
 
 static void stringSplit(const std::string& src, const std::string& separator, std::vector<std::string>& dest)
 {
@@ -117,21 +119,22 @@ static void  configInit(detectInfoSt& detectInfo, CIni& iniFile)
     detectInfo.templatePath = iniFile.GetStr("TEMPLATE_IMAGE", "path");
     detectInfo.camera_sn = iniFile.GetInt("CAMERA", "sn");
     detectInfo.videoReadPath = iniFile.GetStr("VIDEO","read_path");
-    printf("config read roi x:%f y:%f width:%f height:%f \n template path:%s\n camera sn:%d\n video read:%s",
+    printf("config read roi x:%f y:%f width:%f height:%f \n template path:%s\n camera sn:%d\n video read:%s\n",
         detectInfo.roi_x, detectInfo.roi_y, detectInfo.roi_width, detectInfo.roi_height,
         detectInfo.templatePath.c_str(), detectInfo.camera_sn, detectInfo.videoReadPath.c_str());
 }
  
 std::string getTime(void)
 {
-    char time_str[100]={0};
-    time_t now;
-    struct tm *tm_now;
- 
-    time(&now);
-    tm_now = gmtime(&now);
-    snprintf(time_str,sizeof(time_str)-1,"%04d_%02d_%02d %02d:%02d:%02d \n",
-        tm_now->tm_year, tm_now->tm_mon, tm_now->tm_mday, tm_now->tm_hour, tm_now->tm_min, tm_now->tm_sec);
+    char time_str[255]={0};
+    struct timeval tv;
+    struct timezone tz;   
+    struct tm *tmNow;
+    gettimeofday(&tv, &tz);
+    tmNow = localtime(&tv.tv_sec);
+    snprintf(time_str,sizeof(time_str)-1,"%04d_%02d_%02d-%02d_%02d_%02d_%03ld",
+        tmNow->tm_year + 1900, tmNow->tm_mon + 1, tmNow->tm_mday, tmNow->tm_hour, tmNow->tm_min,
+        tmNow->tm_sec, tv.tv_usec/1000);
     
     return time_str;
 }
@@ -174,7 +177,10 @@ static void cameraProcess(int cameraIndex)
     //cv::imshow("src_image1", imageR);
 
     //cv::waitKey(5);
-    cv::imwrite("src_image.jpg", imageR);
+    char srcNameSave[1024] = {0};
+    snprintf(srcNameSave, sizeof(srcNameSave)-1, "img/%d_%s_src.jpg",
+        detectInfo.camera_sn, getTime().c_str());
+    //cv::imwrite(srcNameSave, imageR);
 
     /*       if (imgPro.size() >= 4)
         {
@@ -183,7 +189,7 @@ static void cameraProcess(int cameraIndex)
             imshow("result3", imgPro[3]);
         }
 */
-    printf("%s point cloud: x %f  y %f  z %f \n", getTime().c_str(), pointResult.x, pointResult.y, pointResult.z);
+    printf("%s: point cloud x %f  y %f  z %f \n", getTime().c_str(), pointResult.x, pointResult.y, pointResult.z);
     sl::sleep_ms(10);
 }
 
@@ -196,7 +202,7 @@ int main(int argc, char **argv)
     std::string plcIp = "127.0.0.1";
 
     CIni iniFile;
-    if (iniFile.OpenFile("General.ini") != INI_SUCCESS)
+    if (iniFile.OpenFile("config/General.ini") != INI_SUCCESS)
     {
         printf("read config file General.ini failed!\n");
         return -1;
@@ -209,7 +215,7 @@ int main(int argc, char **argv)
     {
         detectInfoSt detectInfo;
         char path[255] = {0};
-        snprintf(path, sizeof(path) - 1, "Config_%d.ini", i);
+        snprintf(path, sizeof(path) - 1, "config/Config_%d.ini", i);
         if (iniFile.OpenFile(path) != INI_SUCCESS)
         {
             printf("read config file %s failed!\n", path);
@@ -347,10 +353,14 @@ void cameraOpen(zedImage& processor, detectInfoSt detectInfo)
     initParameters.coordinate_units = UNIT_MILLIMETER;
     initParameters.depth_mode = DEPTH_MODE_ULTRA; // Use ULTRA depth mode
     initParameters.enable_right_side_measure = true;
-    initParameters.camera_resolution = RESOLUTION_HD2K;
+    //initParameters.camera_resolution = RESOLUTION_HD2K;
+    initParameters.camera_resolution = RESOLUTION_HD1080;
+    initParameters.camera_fps = 1;
     initParameters.input.setFromSerialNumber(detectInfo.camera_sn);
     if (!processor.zedOpen(initParameters))
     {
+        printf("zed open success sn:%d or video path:%s\n",
+            detectInfo.camera_sn, detectInfo.videoReadPath.c_str());
         cv::Mat image;
         processor.zedImageGet(image, VIEW_LEFT);
         processor.roiSelect(image, detectInfo.roi_x, detectInfo.roi_y, detectInfo.roi_height, 
@@ -360,5 +370,15 @@ void cameraOpen(zedImage& processor, detectInfoSt detectInfo)
     {
         printf("zed open failed sn: %d or video path：%s !\n",
             detectInfo.camera_sn, detectInfo.videoReadPath.c_str());
+        cameraClose();
+        exit(1);
+    }
+}
+
+void cameraClose()
+{
+    for (int i = 0; i < zedProcessorVec.size(); i++)
+    {
+        zedProcessorVec[i]->zedClose();
     }
 }

@@ -67,6 +67,8 @@ stdio.h
 -
 string.h
 -
+sys/time.h
+-
 pthread.h
 -
 opencv2/opencv.hpp

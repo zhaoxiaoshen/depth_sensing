@@ -34,6 +34,7 @@ public:
 public:
 	void init();
 	int zedOpen(InitParameters initParameters);
+	int zedClose();
 	int zedImageGet(cv::Mat& image,int type);
 	cv::Mat slMat2cvMat(sl::Mat &input);
 	void roiSelect(cv::Mat img);

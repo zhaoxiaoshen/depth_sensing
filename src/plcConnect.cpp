@@ -5,13 +5,13 @@ static daveInterface *_di;
 static daveConnection *_dc;
 
 static bool plcConnectStatus = false;
-static int m_nPort = 120;
+static int m_nPort = 102;
 static int m_nRack = 1;
 static int m_nSlot = 0;
 
 int plcConnect(std::string m_strIp)
 {
-    _fds.rfd = openSocket(120, m_strIp.c_str());
+    _fds.rfd = openSocket(102, m_strIp.c_str());
     _fds.wfd = _fds.rfd;
     int useProtocol = daveProtoISOTCP;
 
@@ -27,7 +27,7 @@ int plcConnect(std::string m_strIp)
         snprintf(szconnlog, 255, "daveNewConnection:  Mpi=%d, nrack=%d, slot=%d\n",  Mpi, m_nRack, m_nSlot);
         if (0 == daveConnectPLC(_dc))
         {
-            printf("plc connect success, ip: %s, port: %d", m_strIp.c_str(), m_nPort);
+            printf("plc connect success, ip: %s, port: %d\n", m_strIp.c_str(), m_nPort);
             char szlog[1024] = {0};
             snprintf(szlog, sizeof(szlog) - 1, "connect plc success，ip: %s, port: %d\n", m_strIp.c_str(), m_nPort);
             plcConnectStatus = false;
@@ -44,12 +44,14 @@ int plcConnect(std::string m_strIp)
 
 int dataRead(int DBnum, int start, int len, void *buffer)
 {
-    int res = daveReadManyBytes(_dc, daveDB, DBnum, start, len, buffer);
+   int res = daveReadManyBytes(_dc, daveDB, DBnum, start, len, buffer);
     return res;
 }
 
 int dataWrite(int DBnum, int start, int len, void *buffer)
 {
-    int res = daveReadManyBytes(_dc, daveDB, DBnum, start, len, buffer);
+    int res = daveWriteManyBytes(_dc, daveDB, DBnum, start, len, buffer);
+    //int res = daveWriteBits(_dc, daveFlags, DBnum, start, len, buffer)
+    printf ("write  DBum:%d start:%d len:%d buffer:%d ret: %d \n", DBnum, start, len, ((unsigned char*)buffer)[0], res);
     return res;
 }

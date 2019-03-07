@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/home/nvidia/tools/vscode/depth sensing"
+CMAKE_SOURCE_DIR = "/home/nvidia/Mago/depth sensing"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/home/nvidia/tools/vscode/depth sensing/build"
+CMAKE_BINARY_DIR = "/home/nvidia/Mago/depth sensing/build"
 
 # Include any dependencies generated for this target.
 include CMakeFiles/ZED_Depth_Sensing.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/ZED_Depth_Sensing.dir/flags.make
 
 CMakeFiles/ZED_Depth_Sensing.dir/src/plcConnect.o: CMakeFiles/ZED_Depth_Sensing.dir/flags.make
 CMakeFiles/ZED_Depth_Sensing.dir/src/plcConnect.o: ../src/plcConnect.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/ZED_Depth_Sensing.dir/src/plcConnect.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ZED_Depth_Sensing.dir/src/plcConnect.o -c "/home/nvidia/tools/vscode/depth sensing/src/plcConnect.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/nvidia/Mago/depth sensing/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/ZED_Depth_Sensing.dir/src/plcConnect.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ZED_Depth_Sensing.dir/src/plcConnect.o -c "/home/nvidia/Mago/depth sensing/src/plcConnect.cpp"
 
 CMakeFiles/ZED_Depth_Sensing.dir/src/plcConnect.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ZED_Depth_Sensing.dir/src/plcConnect.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/nvidia/tools/vscode/depth sensing/src/plcConnect.cpp" > CMakeFiles/ZED_Depth_Sensing.dir/src/plcConnect.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/nvidia/Mago/depth sensing/src/plcConnect.cpp" > CMakeFiles/ZED_Depth_Sensing.dir/src/plcConnect.i
 
 CMakeFiles/ZED_Depth_Sensing.dir/src/plcConnect.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ZED_Depth_Sensing.dir/src/plcConnect.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/nvidia/tools/vscode/depth sensing/src/plcConnect.cpp" -o CMakeFiles/ZED_Depth_Sensing.dir/src/plcConnect.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/nvidia/Mago/depth sensing/src/plcConnect.cpp" -o CMakeFiles/ZED_Depth_Sensing.dir/src/plcConnect.s
 
 CMakeFiles/ZED_Depth_Sensing.dir/src/plcConnect.o.requires:
 
@@ -81,42 +81,18 @@ CMakeFiles/ZED_Depth_Sensing.dir/src/plcConnect.o.provides: CMakeFiles/ZED_Depth
 CMakeFiles/ZED_Depth_Sensing.dir/src/plcConnect.o.provides.build: CMakeFiles/ZED_Depth_Sensing.dir/src/plcConnect.o
 
 
-CMakeFiles/ZED_Depth_Sensing.dir/src/main.o: CMakeFiles/ZED_Depth_Sensing.dir/flags.make
-CMakeFiles/ZED_Depth_Sensing.dir/src/main.o: ../src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/ZED_Depth_Sensing.dir/src/main.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ZED_Depth_Sensing.dir/src/main.o -c "/home/nvidia/tools/vscode/depth sensing/src/main.cpp"
-
-CMakeFiles/ZED_Depth_Sensing.dir/src/main.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ZED_Depth_Sensing.dir/src/main.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/nvidia/tools/vscode/depth sensing/src/main.cpp" > CMakeFiles/ZED_Depth_Sensing.dir/src/main.i
-
-CMakeFiles/ZED_Depth_Sensing.dir/src/main.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ZED_Depth_Sensing.dir/src/main.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/nvidia/tools/vscode/depth sensing/src/main.cpp" -o CMakeFiles/ZED_Depth_Sensing.dir/src/main.s
-
-CMakeFiles/ZED_Depth_Sensing.dir/src/main.o.requires:
-
-.PHONY : CMakeFiles/ZED_Depth_Sensing.dir/src/main.o.requires
-
-CMakeFiles/ZED_Depth_Sensing.dir/src/main.o.provides: CMakeFiles/ZED_Depth_Sensing.dir/src/main.o.requires
-	$(MAKE) -f CMakeFiles/ZED_Depth_Sensing.dir/build.make CMakeFiles/ZED_Depth_Sensing.dir/src/main.o.provides.build
-.PHONY : CMakeFiles/ZED_Depth_Sensing.dir/src/main.o.provides
-
-CMakeFiles/ZED_Depth_Sensing.dir/src/main.o.provides.build: CMakeFiles/ZED_Depth_Sensing.dir/src/main.o
-
-
 CMakeFiles/ZED_Depth_Sensing.dir/src/openSocket.o: CMakeFiles/ZED_Depth_Sensing.dir/flags.make
 CMakeFiles/ZED_Depth_Sensing.dir/src/openSocket.o: ../src/openSocket.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/ZED_Depth_Sensing.dir/src/openSocket.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ZED_Depth_Sensing.dir/src/openSocket.o -c "/home/nvidia/tools/vscode/depth sensing/src/openSocket.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/nvidia/Mago/depth sensing/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/ZED_Depth_Sensing.dir/src/openSocket.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ZED_Depth_Sensing.dir/src/openSocket.o -c "/home/nvidia/Mago/depth sensing/src/openSocket.cpp"
 
 CMakeFiles/ZED_Depth_Sensing.dir/src/openSocket.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ZED_Depth_Sensing.dir/src/openSocket.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/nvidia/tools/vscode/depth sensing/src/openSocket.cpp" > CMakeFiles/ZED_Depth_Sensing.dir/src/openSocket.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/nvidia/Mago/depth sensing/src/openSocket.cpp" > CMakeFiles/ZED_Depth_Sensing.dir/src/openSocket.i
 
 CMakeFiles/ZED_Depth_Sensing.dir/src/openSocket.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ZED_Depth_Sensing.dir/src/openSocket.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/nvidia/tools/vscode/depth sensing/src/openSocket.cpp" -o CMakeFiles/ZED_Depth_Sensing.dir/src/openSocket.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/nvidia/Mago/depth sensing/src/openSocket.cpp" -o CMakeFiles/ZED_Depth_Sensing.dir/src/openSocket.s
 
 CMakeFiles/ZED_Depth_Sensing.dir/src/openSocket.o.requires:
 
@@ -129,18 +105,42 @@ CMakeFiles/ZED_Depth_Sensing.dir/src/openSocket.o.provides: CMakeFiles/ZED_Depth
 CMakeFiles/ZED_Depth_Sensing.dir/src/openSocket.o.provides.build: CMakeFiles/ZED_Depth_Sensing.dir/src/openSocket.o
 
 
+CMakeFiles/ZED_Depth_Sensing.dir/src/main.o: CMakeFiles/ZED_Depth_Sensing.dir/flags.make
+CMakeFiles/ZED_Depth_Sensing.dir/src/main.o: ../src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/nvidia/Mago/depth sensing/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/ZED_Depth_Sensing.dir/src/main.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ZED_Depth_Sensing.dir/src/main.o -c "/home/nvidia/Mago/depth sensing/src/main.cpp"
+
+CMakeFiles/ZED_Depth_Sensing.dir/src/main.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ZED_Depth_Sensing.dir/src/main.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/nvidia/Mago/depth sensing/src/main.cpp" > CMakeFiles/ZED_Depth_Sensing.dir/src/main.i
+
+CMakeFiles/ZED_Depth_Sensing.dir/src/main.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ZED_Depth_Sensing.dir/src/main.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/nvidia/Mago/depth sensing/src/main.cpp" -o CMakeFiles/ZED_Depth_Sensing.dir/src/main.s
+
+CMakeFiles/ZED_Depth_Sensing.dir/src/main.o.requires:
+
+.PHONY : CMakeFiles/ZED_Depth_Sensing.dir/src/main.o.requires
+
+CMakeFiles/ZED_Depth_Sensing.dir/src/main.o.provides: CMakeFiles/ZED_Depth_Sensing.dir/src/main.o.requires
+	$(MAKE) -f CMakeFiles/ZED_Depth_Sensing.dir/build.make CMakeFiles/ZED_Depth_Sensing.dir/src/main.o.provides.build
+.PHONY : CMakeFiles/ZED_Depth_Sensing.dir/src/main.o.provides
+
+CMakeFiles/ZED_Depth_Sensing.dir/src/main.o.provides.build: CMakeFiles/ZED_Depth_Sensing.dir/src/main.o
+
+
 CMakeFiles/ZED_Depth_Sensing.dir/src/lockFinder.o: CMakeFiles/ZED_Depth_Sensing.dir/flags.make
 CMakeFiles/ZED_Depth_Sensing.dir/src/lockFinder.o: ../src/lockFinder.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/ZED_Depth_Sensing.dir/src/lockFinder.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ZED_Depth_Sensing.dir/src/lockFinder.o -c "/home/nvidia/tools/vscode/depth sensing/src/lockFinder.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/nvidia/Mago/depth sensing/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/ZED_Depth_Sensing.dir/src/lockFinder.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ZED_Depth_Sensing.dir/src/lockFinder.o -c "/home/nvidia/Mago/depth sensing/src/lockFinder.cpp"
 
 CMakeFiles/ZED_Depth_Sensing.dir/src/lockFinder.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ZED_Depth_Sensing.dir/src/lockFinder.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/nvidia/tools/vscode/depth sensing/src/lockFinder.cpp" > CMakeFiles/ZED_Depth_Sensing.dir/src/lockFinder.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/nvidia/Mago/depth sensing/src/lockFinder.cpp" > CMakeFiles/ZED_Depth_Sensing.dir/src/lockFinder.i
 
 CMakeFiles/ZED_Depth_Sensing.dir/src/lockFinder.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ZED_Depth_Sensing.dir/src/lockFinder.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/nvidia/tools/vscode/depth sensing/src/lockFinder.cpp" -o CMakeFiles/ZED_Depth_Sensing.dir/src/lockFinder.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/nvidia/Mago/depth sensing/src/lockFinder.cpp" -o CMakeFiles/ZED_Depth_Sensing.dir/src/lockFinder.s
 
 CMakeFiles/ZED_Depth_Sensing.dir/src/lockFinder.o.requires:
 
@@ -155,16 +155,16 @@ CMakeFiles/ZED_Depth_Sensing.dir/src/lockFinder.o.provides.build: CMakeFiles/ZED
 
 CMakeFiles/ZED_Depth_Sensing.dir/src/GLViewer.o: CMakeFiles/ZED_Depth_Sensing.dir/flags.make
 CMakeFiles/ZED_Depth_Sensing.dir/src/GLViewer.o: ../src/GLViewer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/ZED_Depth_Sensing.dir/src/GLViewer.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ZED_Depth_Sensing.dir/src/GLViewer.o -c "/home/nvidia/tools/vscode/depth sensing/src/GLViewer.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/nvidia/Mago/depth sensing/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/ZED_Depth_Sensing.dir/src/GLViewer.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ZED_Depth_Sensing.dir/src/GLViewer.o -c "/home/nvidia/Mago/depth sensing/src/GLViewer.cpp"
 
 CMakeFiles/ZED_Depth_Sensing.dir/src/GLViewer.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ZED_Depth_Sensing.dir/src/GLViewer.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/nvidia/tools/vscode/depth sensing/src/GLViewer.cpp" > CMakeFiles/ZED_Depth_Sensing.dir/src/GLViewer.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/nvidia/Mago/depth sensing/src/GLViewer.cpp" > CMakeFiles/ZED_Depth_Sensing.dir/src/GLViewer.i
 
 CMakeFiles/ZED_Depth_Sensing.dir/src/GLViewer.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ZED_Depth_Sensing.dir/src/GLViewer.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/nvidia/tools/vscode/depth sensing/src/GLViewer.cpp" -o CMakeFiles/ZED_Depth_Sensing.dir/src/GLViewer.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/nvidia/Mago/depth sensing/src/GLViewer.cpp" -o CMakeFiles/ZED_Depth_Sensing.dir/src/GLViewer.s
 
 CMakeFiles/ZED_Depth_Sensing.dir/src/GLViewer.o.requires:
 
@@ -179,16 +179,16 @@ CMakeFiles/ZED_Depth_Sensing.dir/src/GLViewer.o.provides.build: CMakeFiles/ZED_D
 
 CMakeFiles/ZED_Depth_Sensing.dir/src/iniRead.o: CMakeFiles/ZED_Depth_Sensing.dir/flags.make
 CMakeFiles/ZED_Depth_Sensing.dir/src/iniRead.o: ../src/iniRead.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/ZED_Depth_Sensing.dir/src/iniRead.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ZED_Depth_Sensing.dir/src/iniRead.o -c "/home/nvidia/tools/vscode/depth sensing/src/iniRead.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/nvidia/Mago/depth sensing/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/ZED_Depth_Sensing.dir/src/iniRead.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ZED_Depth_Sensing.dir/src/iniRead.o -c "/home/nvidia/Mago/depth sensing/src/iniRead.cpp"
 
 CMakeFiles/ZED_Depth_Sensing.dir/src/iniRead.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ZED_Depth_Sensing.dir/src/iniRead.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/nvidia/tools/vscode/depth sensing/src/iniRead.cpp" > CMakeFiles/ZED_Depth_Sensing.dir/src/iniRead.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/nvidia/Mago/depth sensing/src/iniRead.cpp" > CMakeFiles/ZED_Depth_Sensing.dir/src/iniRead.i
 
 CMakeFiles/ZED_Depth_Sensing.dir/src/iniRead.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ZED_Depth_Sensing.dir/src/iniRead.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/nvidia/tools/vscode/depth sensing/src/iniRead.cpp" -o CMakeFiles/ZED_Depth_Sensing.dir/src/iniRead.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/nvidia/Mago/depth sensing/src/iniRead.cpp" -o CMakeFiles/ZED_Depth_Sensing.dir/src/iniRead.s
 
 CMakeFiles/ZED_Depth_Sensing.dir/src/iniRead.o.requires:
 
@@ -203,16 +203,16 @@ CMakeFiles/ZED_Depth_Sensing.dir/src/iniRead.o.provides.build: CMakeFiles/ZED_De
 
 CMakeFiles/ZED_Depth_Sensing.dir/src/zedImage.o: CMakeFiles/ZED_Depth_Sensing.dir/flags.make
 CMakeFiles/ZED_Depth_Sensing.dir/src/zedImage.o: ../src/zedImage.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/ZED_Depth_Sensing.dir/src/zedImage.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ZED_Depth_Sensing.dir/src/zedImage.o -c "/home/nvidia/tools/vscode/depth sensing/src/zedImage.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/nvidia/Mago/depth sensing/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/ZED_Depth_Sensing.dir/src/zedImage.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ZED_Depth_Sensing.dir/src/zedImage.o -c "/home/nvidia/Mago/depth sensing/src/zedImage.cpp"
 
 CMakeFiles/ZED_Depth_Sensing.dir/src/zedImage.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ZED_Depth_Sensing.dir/src/zedImage.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/nvidia/tools/vscode/depth sensing/src/zedImage.cpp" > CMakeFiles/ZED_Depth_Sensing.dir/src/zedImage.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/nvidia/Mago/depth sensing/src/zedImage.cpp" > CMakeFiles/ZED_Depth_Sensing.dir/src/zedImage.i
 
 CMakeFiles/ZED_Depth_Sensing.dir/src/zedImage.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ZED_Depth_Sensing.dir/src/zedImage.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/nvidia/tools/vscode/depth sensing/src/zedImage.cpp" -o CMakeFiles/ZED_Depth_Sensing.dir/src/zedImage.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/nvidia/Mago/depth sensing/src/zedImage.cpp" -o CMakeFiles/ZED_Depth_Sensing.dir/src/zedImage.s
 
 CMakeFiles/ZED_Depth_Sensing.dir/src/zedImage.o.requires:
 
@@ -228,8 +228,8 @@ CMakeFiles/ZED_Depth_Sensing.dir/src/zedImage.o.provides.build: CMakeFiles/ZED_D
 # Object files for target ZED_Depth_Sensing
 ZED_Depth_Sensing_OBJECTS = \
 "CMakeFiles/ZED_Depth_Sensing.dir/src/plcConnect.o" \
-"CMakeFiles/ZED_Depth_Sensing.dir/src/main.o" \
 "CMakeFiles/ZED_Depth_Sensing.dir/src/openSocket.o" \
+"CMakeFiles/ZED_Depth_Sensing.dir/src/main.o" \
 "CMakeFiles/ZED_Depth_Sensing.dir/src/lockFinder.o" \
 "CMakeFiles/ZED_Depth_Sensing.dir/src/GLViewer.o" \
 "CMakeFiles/ZED_Depth_Sensing.dir/src/iniRead.o" \
@@ -239,8 +239,8 @@ ZED_Depth_Sensing_OBJECTS = \
 ZED_Depth_Sensing_EXTERNAL_OBJECTS =
 
 ZED_Depth_Sensing: CMakeFiles/ZED_Depth_Sensing.dir/src/plcConnect.o
-ZED_Depth_Sensing: CMakeFiles/ZED_Depth_Sensing.dir/src/main.o
 ZED_Depth_Sensing: CMakeFiles/ZED_Depth_Sensing.dir/src/openSocket.o
+ZED_Depth_Sensing: CMakeFiles/ZED_Depth_Sensing.dir/src/main.o
 ZED_Depth_Sensing: CMakeFiles/ZED_Depth_Sensing.dir/src/lockFinder.o
 ZED_Depth_Sensing: CMakeFiles/ZED_Depth_Sensing.dir/src/GLViewer.o
 ZED_Depth_Sensing: CMakeFiles/ZED_Depth_Sensing.dir/src/iniRead.o
@@ -264,58 +264,30 @@ ZED_Depth_Sensing: /usr/local/cuda-9.0/lib64/libnppitc.so
 ZED_Depth_Sensing: /usr/local/cuda-9.0/lib64/libnpps.so
 ZED_Depth_Sensing: /usr/lib/aarch64-linux-gnu/libGLU.so
 ZED_Depth_Sensing: /usr/lib/aarch64-linux-gnu/libGL.so
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_stitching3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_superres3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_videostab3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_aruco3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_bgsegm3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_bioinspired3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_ccalib3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_cvv3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_dpm3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_face3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_fuzzy3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_hdf3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_img_hash3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_line_descriptor3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_optflow3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_reg3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_rgbd3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_saliency3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_stereo3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_structured_light3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_surface_matching3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_tracking3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_xfeatures2d3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_ximgproc3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_xobjdetect3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_xphoto3.so.3.3.1
+ZED_Depth_Sensing: /usr/lib/libopencv_dnn.so.3.3.1
+ZED_Depth_Sensing: /usr/lib/libopencv_ml.so.3.3.1
+ZED_Depth_Sensing: /usr/lib/libopencv_objdetect.so.3.3.1
+ZED_Depth_Sensing: /usr/lib/libopencv_shape.so.3.3.1
+ZED_Depth_Sensing: /usr/lib/libopencv_stitching.so.3.3.1
+ZED_Depth_Sensing: /usr/lib/libopencv_superres.so.3.3.1
+ZED_Depth_Sensing: /usr/lib/libopencv_videostab.so.3.3.1
 ZED_Depth_Sensing: /usr/lib/aarch64-linux-gnu/libglut.so
 ZED_Depth_Sensing: /usr/lib/aarch64-linux-gnu/libXmu.so
 ZED_Depth_Sensing: /usr/lib/aarch64-linux-gnu/libXi.so
 ZED_Depth_Sensing: /usr/lib/libnodave.so
 ZED_Depth_Sensing: /usr/lib/aarch64-linux-gnu/libGLEW.so
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_shape3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_photo3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_datasets3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_plot3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_text3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_dnn3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_ml3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_video3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_calib3d3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_features2d3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_highgui3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_videoio3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_viz3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_phase_unwrapping3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_flann3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_imgcodecs3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_objdetect3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_imgproc3.so.3.3.1
-ZED_Depth_Sensing: /opt/ros/kinetic/lib/aarch64-linux-gnu/libopencv_core3.so.3.3.1
+ZED_Depth_Sensing: /usr/lib/libopencv_calib3d.so.3.3.1
+ZED_Depth_Sensing: /usr/lib/libopencv_features2d.so.3.3.1
+ZED_Depth_Sensing: /usr/lib/libopencv_flann.so.3.3.1
+ZED_Depth_Sensing: /usr/lib/libopencv_highgui.so.3.3.1
+ZED_Depth_Sensing: /usr/lib/libopencv_photo.so.3.3.1
+ZED_Depth_Sensing: /usr/lib/libopencv_video.so.3.3.1
+ZED_Depth_Sensing: /usr/lib/libopencv_videoio.so.3.3.1
+ZED_Depth_Sensing: /usr/lib/libopencv_imgcodecs.so.3.3.1
+ZED_Depth_Sensing: /usr/lib/libopencv_imgproc.so.3.3.1
+ZED_Depth_Sensing: /usr/lib/libopencv_core.so.3.3.1
 ZED_Depth_Sensing: CMakeFiles/ZED_Depth_Sensing.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable ZED_Depth_Sensing"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/home/nvidia/Mago/depth sensing/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable ZED_Depth_Sensing"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ZED_Depth_Sensing.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -324,8 +296,8 @@ CMakeFiles/ZED_Depth_Sensing.dir/build: ZED_Depth_Sensing
 .PHONY : CMakeFiles/ZED_Depth_Sensing.dir/build
 
 CMakeFiles/ZED_Depth_Sensing.dir/requires: CMakeFiles/ZED_Depth_Sensing.dir/src/plcConnect.o.requires
-CMakeFiles/ZED_Depth_Sensing.dir/requires: CMakeFiles/ZED_Depth_Sensing.dir/src/main.o.requires
 CMakeFiles/ZED_Depth_Sensing.dir/requires: CMakeFiles/ZED_Depth_Sensing.dir/src/openSocket.o.requires
+CMakeFiles/ZED_Depth_Sensing.dir/requires: CMakeFiles/ZED_Depth_Sensing.dir/src/main.o.requires
 CMakeFiles/ZED_Depth_Sensing.dir/requires: CMakeFiles/ZED_Depth_Sensing.dir/src/lockFinder.o.requires
 CMakeFiles/ZED_Depth_Sensing.dir/requires: CMakeFiles/ZED_Depth_Sensing.dir/src/GLViewer.o.requires
 CMakeFiles/ZED_Depth_Sensing.dir/requires: CMakeFiles/ZED_Depth_Sensing.dir/src/iniRead.o.requires
@@ -338,6 +310,6 @@ CMakeFiles/ZED_Depth_Sensing.dir/clean:
 .PHONY : CMakeFiles/ZED_Depth_Sensing.dir/clean
 
 CMakeFiles/ZED_Depth_Sensing.dir/depend:
-	cd "/home/nvidia/tools/vscode/depth sensing/build" && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" "/home/nvidia/tools/vscode/depth sensing" "/home/nvidia/tools/vscode/depth sensing" "/home/nvidia/tools/vscode/depth sensing/build" "/home/nvidia/tools/vscode/depth sensing/build" "/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/ZED_Depth_Sensing.dir/DependInfo.cmake" --color=$(COLOR)
+	cd "/home/nvidia/Mago/depth sensing/build" && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" "/home/nvidia/Mago/depth sensing" "/home/nvidia/Mago/depth sensing" "/home/nvidia/Mago/depth sensing/build" "/home/nvidia/Mago/depth sensing/build" "/home/nvidia/Mago/depth sensing/build/CMakeFiles/ZED_Depth_Sensing.dir/DependInfo.cmake" --color=$(COLOR)
 .PHONY : CMakeFiles/ZED_Depth_Sensing.dir/depend
 

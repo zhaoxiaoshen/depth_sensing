@@ -10,7 +10,7 @@ The output was:
 
 Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
 
-The C compiler identification is GNU, found in "/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/3.5.1/CompilerIdC/a.out"
+The C compiler identification is GNU, found in "/home/nvidia/Mago/depth sensing/build/CMakeFiles/3.5.1/CompilerIdC/a.out"
 
 Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
 Compiler: /usr/bin/c++ 
@@ -23,33 +23,33 @@ The output was:
 
 Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
 
-The CXX compiler identification is GNU, found in "/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/3.5.1/CompilerIdCXX/a.out"
+The CXX compiler identification is GNU, found in "/home/nvidia/Mago/depth sensing/build/CMakeFiles/3.5.1/CompilerIdCXX/a.out"
 
 Determining if the C compiler works passed with the following output:
-Change Dir: /home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp
+Change Dir: /home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_a271d/fast"
-/usr/bin/make -f CMakeFiles/cmTC_a271d.dir/build.make CMakeFiles/cmTC_a271d.dir/build
-make[1]: Entering directory '/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_a271d.dir/testCCompiler.c.o
-/usr/bin/cc     -o CMakeFiles/cmTC_a271d.dir/testCCompiler.c.o   -c "/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp/testCCompiler.c"
-Linking C executable cmTC_a271d
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a271d.dir/link.txt --verbose=1
-/usr/bin/cc       CMakeFiles/cmTC_a271d.dir/testCCompiler.c.o  -o cmTC_a271d -rdynamic 
-make[1]: Leaving directory '/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_3a496/fast"
+/usr/bin/make -f CMakeFiles/cmTC_3a496.dir/build.make CMakeFiles/cmTC_3a496.dir/build
+make[1]: Entering directory '/home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_3a496.dir/testCCompiler.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_3a496.dir/testCCompiler.c.o   -c "/home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp/testCCompiler.c"
+Linking C executable cmTC_3a496
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3a496.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_3a496.dir/testCCompiler.c.o  -o cmTC_3a496 -rdynamic 
+make[1]: Leaving directory '/home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp'
 
 
 Detecting C compiler ABI info compiled with the following output:
-Change Dir: /home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp
+Change Dir: /home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_cfe98/fast"
-/usr/bin/make -f CMakeFiles/cmTC_cfe98.dir/build.make CMakeFiles/cmTC_cfe98.dir/build
-make[1]: Entering directory '/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_cfe98.dir/CMakeCCompilerABI.c.o
-/usr/bin/cc     -o CMakeFiles/cmTC_cfe98.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.5/Modules/CMakeCCompilerABI.c
-Linking C executable cmTC_cfe98
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_cfe98.dir/link.txt --verbose=1
-/usr/bin/cc      -v CMakeFiles/cmTC_cfe98.dir/CMakeCCompilerABI.c.o  -o cmTC_cfe98 -rdynamic  
+Run Build Command:"/usr/bin/make" "cmTC_5f108/fast"
+/usr/bin/make -f CMakeFiles/cmTC_5f108.dir/build.make CMakeFiles/cmTC_5f108.dir/build
+make[1]: Entering directory '/home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_5f108.dir/CMakeCCompilerABI.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_5f108.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.5/Modules/CMakeCCompilerABI.c
+Linking C executable cmTC_5f108
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5f108.dir/link.txt --verbose=1
+/usr/bin/cc      -v CMakeFiles/cmTC_5f108.dir/CMakeCCompilerABI.c.o  -o cmTC_5f108 -rdynamic  
 Using built-in specs.
 COLLECT_GCC=/usr/bin/cc
 COLLECT_LTO_WRAPPER=/usr/lib/gcc/aarch64-linux-gnu/5/lto-wrapper
@@ -59,23 +59,23 @@ Thread model: posix
 gcc version 5.4.0 20160609 (Ubuntu/Linaro 5.4.0-6ubuntu1~16.04.11) 
 COMPILER_PATH=/usr/lib/gcc/aarch64-linux-gnu/5/:/usr/lib/gcc/aarch64-linux-gnu/5/:/usr/lib/gcc/aarch64-linux-gnu/:/usr/lib/gcc/aarch64-linux-gnu/5/:/usr/lib/gcc/aarch64-linux-gnu/
 LIBRARY_PATH=/usr/lib/gcc/aarch64-linux-gnu/5/:/usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu/:/usr/lib/gcc/aarch64-linux-gnu/5/../../../../lib/:/lib/aarch64-linux-gnu/:/lib/../lib/:/usr/lib/aarch64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/aarch64-linux-gnu/5/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_cfe98' '-rdynamic' '-mlittle-endian' '-mabi=lp64'
- /usr/lib/gcc/aarch64-linux-gnu/5/collect2 -plugin /usr/lib/gcc/aarch64-linux-gnu/5/liblto_plugin.so -plugin-opt=/usr/lib/gcc/aarch64-linux-gnu/5/lto-wrapper -plugin-opt=-fresolution=/tmp/cc8CixpQ.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/ --build-id --eh-frame-hdr --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib/ld-linux-aarch64.so.1 -X -EL -maarch64linux --fix-cortex-a53-843419 -z relro -o cmTC_cfe98 /usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu/crt1.o /usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu/crti.o /usr/lib/gcc/aarch64-linux-gnu/5/crtbegin.o -L/usr/lib/gcc/aarch64-linux-gnu/5 -L/usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu -L/usr/lib/gcc/aarch64-linux-gnu/5/../../../../lib -L/lib/aarch64-linux-gnu -L/lib/../lib -L/usr/lib/aarch64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/aarch64-linux-gnu/5/../../.. CMakeFiles/cmTC_cfe98.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/aarch64-linux-gnu/5/crtend.o /usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu/crtn.o
-make[1]: Leaving directory '/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp'
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_5f108' '-rdynamic' '-mlittle-endian' '-mabi=lp64'
+ /usr/lib/gcc/aarch64-linux-gnu/5/collect2 -plugin /usr/lib/gcc/aarch64-linux-gnu/5/liblto_plugin.so -plugin-opt=/usr/lib/gcc/aarch64-linux-gnu/5/lto-wrapper -plugin-opt=-fresolution=/tmp/cclcxHuP.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/ --build-id --eh-frame-hdr --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib/ld-linux-aarch64.so.1 -X -EL -maarch64linux --fix-cortex-a53-843419 -z relro -o cmTC_5f108 /usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu/crt1.o /usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu/crti.o /usr/lib/gcc/aarch64-linux-gnu/5/crtbegin.o -L/usr/lib/gcc/aarch64-linux-gnu/5 -L/usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu -L/usr/lib/gcc/aarch64-linux-gnu/5/../../../../lib -L/lib/aarch64-linux-gnu -L/lib/../lib -L/usr/lib/aarch64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/aarch64-linux-gnu/5/../../.. CMakeFiles/cmTC_5f108.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/aarch64-linux-gnu/5/crtend.o /usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu/crtn.o
+make[1]: Leaving directory '/home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp'
 
 
 Parsed C implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
-  ignore line: [Change Dir: /home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp]
+  ignore line: [Change Dir: /home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_cfe98/fast"]
-  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_cfe98.dir/build.make CMakeFiles/cmTC_cfe98.dir/build]
-  ignore line: [make[1]: Entering directory '/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp']
-  ignore line: [Building C object CMakeFiles/cmTC_cfe98.dir/CMakeCCompilerABI.c.o]
-  ignore line: [/usr/bin/cc     -o CMakeFiles/cmTC_cfe98.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.5/Modules/CMakeCCompilerABI.c]
-  ignore line: [Linking C executable cmTC_cfe98]
-  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_cfe98.dir/link.txt --verbose=1]
-  ignore line: [/usr/bin/cc      -v CMakeFiles/cmTC_cfe98.dir/CMakeCCompilerABI.c.o  -o cmTC_cfe98 -rdynamic  ]
+  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_5f108/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_5f108.dir/build.make CMakeFiles/cmTC_5f108.dir/build]
+  ignore line: [make[1]: Entering directory '/home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp']
+  ignore line: [Building C object CMakeFiles/cmTC_5f108.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/usr/bin/cc     -o CMakeFiles/cmTC_5f108.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.5/Modules/CMakeCCompilerABI.c]
+  ignore line: [Linking C executable cmTC_5f108]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5f108.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/cc      -v CMakeFiles/cmTC_5f108.dir/CMakeCCompilerABI.c.o  -o cmTC_5f108 -rdynamic  ]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/usr/bin/cc]
   ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/aarch64-linux-gnu/5/lto-wrapper]
@@ -85,13 +85,13 @@ Parsed C implicit link information from above output:
   ignore line: [gcc version 5.4.0 20160609 (Ubuntu/Linaro 5.4.0-6ubuntu1~16.04.11) ]
   ignore line: [COMPILER_PATH=/usr/lib/gcc/aarch64-linux-gnu/5/:/usr/lib/gcc/aarch64-linux-gnu/5/:/usr/lib/gcc/aarch64-linux-gnu/:/usr/lib/gcc/aarch64-linux-gnu/5/:/usr/lib/gcc/aarch64-linux-gnu/]
   ignore line: [LIBRARY_PATH=/usr/lib/gcc/aarch64-linux-gnu/5/:/usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu/:/usr/lib/gcc/aarch64-linux-gnu/5/../../../../lib/:/lib/aarch64-linux-gnu/:/lib/../lib/:/usr/lib/aarch64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/aarch64-linux-gnu/5/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_cfe98' '-rdynamic' '-mlittle-endian' '-mabi=lp64']
-  link line: [ /usr/lib/gcc/aarch64-linux-gnu/5/collect2 -plugin /usr/lib/gcc/aarch64-linux-gnu/5/liblto_plugin.so -plugin-opt=/usr/lib/gcc/aarch64-linux-gnu/5/lto-wrapper -plugin-opt=-fresolution=/tmp/cc8CixpQ.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/ --build-id --eh-frame-hdr --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib/ld-linux-aarch64.so.1 -X -EL -maarch64linux --fix-cortex-a53-843419 -z relro -o cmTC_cfe98 /usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu/crt1.o /usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu/crti.o /usr/lib/gcc/aarch64-linux-gnu/5/crtbegin.o -L/usr/lib/gcc/aarch64-linux-gnu/5 -L/usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu -L/usr/lib/gcc/aarch64-linux-gnu/5/../../../../lib -L/lib/aarch64-linux-gnu -L/lib/../lib -L/usr/lib/aarch64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/aarch64-linux-gnu/5/../../.. CMakeFiles/cmTC_cfe98.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/aarch64-linux-gnu/5/crtend.o /usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_5f108' '-rdynamic' '-mlittle-endian' '-mabi=lp64']
+  link line: [ /usr/lib/gcc/aarch64-linux-gnu/5/collect2 -plugin /usr/lib/gcc/aarch64-linux-gnu/5/liblto_plugin.so -plugin-opt=/usr/lib/gcc/aarch64-linux-gnu/5/lto-wrapper -plugin-opt=-fresolution=/tmp/cclcxHuP.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/ --build-id --eh-frame-hdr --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib/ld-linux-aarch64.so.1 -X -EL -maarch64linux --fix-cortex-a53-843419 -z relro -o cmTC_5f108 /usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu/crt1.o /usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu/crti.o /usr/lib/gcc/aarch64-linux-gnu/5/crtbegin.o -L/usr/lib/gcc/aarch64-linux-gnu/5 -L/usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu -L/usr/lib/gcc/aarch64-linux-gnu/5/../../../../lib -L/lib/aarch64-linux-gnu -L/lib/../lib -L/usr/lib/aarch64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/aarch64-linux-gnu/5/../../.. CMakeFiles/cmTC_5f108.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/aarch64-linux-gnu/5/crtend.o /usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu/crtn.o]
     arg [/usr/lib/gcc/aarch64-linux-gnu/5/collect2] ==> ignore
     arg [-plugin] ==> ignore
     arg [/usr/lib/gcc/aarch64-linux-gnu/5/liblto_plugin.so] ==> ignore
     arg [-plugin-opt=/usr/lib/gcc/aarch64-linux-gnu/5/lto-wrapper] ==> ignore
-    arg [-plugin-opt=-fresolution=/tmp/cc8CixpQ.res] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/cclcxHuP.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
@@ -111,7 +111,7 @@ Parsed C implicit link information from above output:
     arg [--fix-cortex-a53-843419] ==> ignore
     arg [-zrelro] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_cfe98] ==> ignore
+    arg [cmTC_5f108] ==> ignore
     arg [/usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu/crt1.o] ==> ignore
     arg [/usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu/crti.o] ==> ignore
     arg [/usr/lib/gcc/aarch64-linux-gnu/5/crtbegin.o] ==> ignore
@@ -123,7 +123,7 @@ Parsed C implicit link information from above output:
     arg [-L/usr/lib/aarch64-linux-gnu] ==> dir [/usr/lib/aarch64-linux-gnu]
     arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
     arg [-L/usr/lib/gcc/aarch64-linux-gnu/5/../../..] ==> dir [/usr/lib/gcc/aarch64-linux-gnu/5/../../..]
-    arg [CMakeFiles/cmTC_cfe98.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [CMakeFiles/cmTC_5f108.dir/CMakeCCompilerABI.c.o] ==> ignore
     arg [-lgcc] ==> lib [gcc]
     arg [--as-needed] ==> ignore
     arg [-lgcc_s] ==> lib [gcc_s]
@@ -155,17 +155,17 @@ Parsed C implicit link information from above output:
 
 
 Detecting C [-std=c11] compiler features compiled with the following output:
-Change Dir: /home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp
+Change Dir: /home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_f3b5d/fast"
-/usr/bin/make -f CMakeFiles/cmTC_f3b5d.dir/build.make CMakeFiles/cmTC_f3b5d.dir/build
-make[1]: Entering directory '/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_f3b5d.dir/feature_tests.c.o
-/usr/bin/cc    -std=c11 -o CMakeFiles/cmTC_f3b5d.dir/feature_tests.c.o   -c "/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/feature_tests.c"
-Linking C executable cmTC_f3b5d
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f3b5d.dir/link.txt --verbose=1
-/usr/bin/cc       CMakeFiles/cmTC_f3b5d.dir/feature_tests.c.o  -o cmTC_f3b5d -rdynamic 
-make[1]: Leaving directory '/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_e5b92/fast"
+/usr/bin/make -f CMakeFiles/cmTC_e5b92.dir/build.make CMakeFiles/cmTC_e5b92.dir/build
+make[1]: Entering directory '/home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_e5b92.dir/feature_tests.c.o
+/usr/bin/cc    -std=c11 -o CMakeFiles/cmTC_e5b92.dir/feature_tests.c.o   -c "/home/nvidia/Mago/depth sensing/build/CMakeFiles/feature_tests.c"
+Linking C executable cmTC_e5b92
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e5b92.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_e5b92.dir/feature_tests.c.o  -o cmTC_e5b92 -rdynamic 
+make[1]: Leaving directory '/home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp'
 
 
     Feature record: C_FEATURE:1c_function_prototypes
@@ -175,17 +175,17 @@ make[1]: Leaving directory '/home/nvidia/tools/vscode/depth sensing/build/CMakeF
 
 
 Detecting C [-std=c99] compiler features compiled with the following output:
-Change Dir: /home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp
+Change Dir: /home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_1f2b3/fast"
-/usr/bin/make -f CMakeFiles/cmTC_1f2b3.dir/build.make CMakeFiles/cmTC_1f2b3.dir/build
-make[1]: Entering directory '/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_1f2b3.dir/feature_tests.c.o
-/usr/bin/cc    -std=c99 -o CMakeFiles/cmTC_1f2b3.dir/feature_tests.c.o   -c "/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/feature_tests.c"
-Linking C executable cmTC_1f2b3
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1f2b3.dir/link.txt --verbose=1
-/usr/bin/cc       CMakeFiles/cmTC_1f2b3.dir/feature_tests.c.o  -o cmTC_1f2b3 -rdynamic 
-make[1]: Leaving directory '/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_28e97/fast"
+/usr/bin/make -f CMakeFiles/cmTC_28e97.dir/build.make CMakeFiles/cmTC_28e97.dir/build
+make[1]: Entering directory '/home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_28e97.dir/feature_tests.c.o
+/usr/bin/cc    -std=c99 -o CMakeFiles/cmTC_28e97.dir/feature_tests.c.o   -c "/home/nvidia/Mago/depth sensing/build/CMakeFiles/feature_tests.c"
+Linking C executable cmTC_28e97
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_28e97.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_28e97.dir/feature_tests.c.o  -o cmTC_28e97 -rdynamic 
+make[1]: Leaving directory '/home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp'
 
 
     Feature record: C_FEATURE:1c_function_prototypes
@@ -195,17 +195,17 @@ make[1]: Leaving directory '/home/nvidia/tools/vscode/depth sensing/build/CMakeF
 
 
 Detecting C [-std=c90] compiler features compiled with the following output:
-Change Dir: /home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp
+Change Dir: /home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_5de08/fast"
-/usr/bin/make -f CMakeFiles/cmTC_5de08.dir/build.make CMakeFiles/cmTC_5de08.dir/build
-make[1]: Entering directory '/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_5de08.dir/feature_tests.c.o
-/usr/bin/cc    -std=c90 -o CMakeFiles/cmTC_5de08.dir/feature_tests.c.o   -c "/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/feature_tests.c"
-Linking C executable cmTC_5de08
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5de08.dir/link.txt --verbose=1
-/usr/bin/cc       CMakeFiles/cmTC_5de08.dir/feature_tests.c.o  -o cmTC_5de08 -rdynamic 
-make[1]: Leaving directory '/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_e5966/fast"
+/usr/bin/make -f CMakeFiles/cmTC_e5966.dir/build.make CMakeFiles/cmTC_e5966.dir/build
+make[1]: Entering directory '/home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_e5966.dir/feature_tests.c.o
+/usr/bin/cc    -std=c90 -o CMakeFiles/cmTC_e5966.dir/feature_tests.c.o   -c "/home/nvidia/Mago/depth sensing/build/CMakeFiles/feature_tests.c"
+Linking C executable cmTC_e5966
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e5966.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_e5966.dir/feature_tests.c.o  -o cmTC_e5966 -rdynamic 
+make[1]: Leaving directory '/home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp'
 
 
     Feature record: C_FEATURE:1c_function_prototypes
@@ -213,30 +213,30 @@ make[1]: Leaving directory '/home/nvidia/tools/vscode/depth sensing/build/CMakeF
     Feature record: C_FEATURE:0c_static_assert
     Feature record: C_FEATURE:0c_variadic_macros
 Determining if the CXX compiler works passed with the following output:
-Change Dir: /home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp
+Change Dir: /home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_35917/fast"
-/usr/bin/make -f CMakeFiles/cmTC_35917.dir/build.make CMakeFiles/cmTC_35917.dir/build
-make[1]: Entering directory '/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_35917.dir/testCXXCompiler.cxx.o
-/usr/bin/c++      -o CMakeFiles/cmTC_35917.dir/testCXXCompiler.cxx.o -c "/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx"
-Linking CXX executable cmTC_35917
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_35917.dir/link.txt --verbose=1
-/usr/bin/c++        CMakeFiles/cmTC_35917.dir/testCXXCompiler.cxx.o  -o cmTC_35917 -rdynamic 
-make[1]: Leaving directory '/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_83128/fast"
+/usr/bin/make -f CMakeFiles/cmTC_83128.dir/build.make CMakeFiles/cmTC_83128.dir/build
+make[1]: Entering directory '/home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_83128.dir/testCXXCompiler.cxx.o
+/usr/bin/c++      -o CMakeFiles/cmTC_83128.dir/testCXXCompiler.cxx.o -c "/home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx"
+Linking CXX executable cmTC_83128
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_83128.dir/link.txt --verbose=1
+/usr/bin/c++        CMakeFiles/cmTC_83128.dir/testCXXCompiler.cxx.o  -o cmTC_83128 -rdynamic 
+make[1]: Leaving directory '/home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp'
 
 
 Detecting CXX compiler ABI info compiled with the following output:
-Change Dir: /home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp
+Change Dir: /home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_73318/fast"
-/usr/bin/make -f CMakeFiles/cmTC_73318.dir/build.make CMakeFiles/cmTC_73318.dir/build
-make[1]: Entering directory '/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_73318.dir/CMakeCXXCompilerABI.cpp.o
-/usr/bin/c++      -o CMakeFiles/cmTC_73318.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.5/Modules/CMakeCXXCompilerABI.cpp
-Linking CXX executable cmTC_73318
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_73318.dir/link.txt --verbose=1
-/usr/bin/c++       -v CMakeFiles/cmTC_73318.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_73318 -rdynamic  
+Run Build Command:"/usr/bin/make" "cmTC_c6c35/fast"
+/usr/bin/make -f CMakeFiles/cmTC_c6c35.dir/build.make CMakeFiles/cmTC_c6c35.dir/build
+make[1]: Entering directory '/home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_c6c35.dir/CMakeCXXCompilerABI.cpp.o
+/usr/bin/c++      -o CMakeFiles/cmTC_c6c35.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.5/Modules/CMakeCXXCompilerABI.cpp
+Linking CXX executable cmTC_c6c35
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c6c35.dir/link.txt --verbose=1
+/usr/bin/c++       -v CMakeFiles/cmTC_c6c35.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_c6c35 -rdynamic  
 Using built-in specs.
 COLLECT_GCC=/usr/bin/c++
 COLLECT_LTO_WRAPPER=/usr/lib/gcc/aarch64-linux-gnu/5/lto-wrapper
@@ -246,23 +246,23 @@ Thread model: posix
 gcc version 5.4.0 20160609 (Ubuntu/Linaro 5.4.0-6ubuntu1~16.04.11) 
 COMPILER_PATH=/usr/lib/gcc/aarch64-linux-gnu/5/:/usr/lib/gcc/aarch64-linux-gnu/5/:/usr/lib/gcc/aarch64-linux-gnu/:/usr/lib/gcc/aarch64-linux-gnu/5/:/usr/lib/gcc/aarch64-linux-gnu/
 LIBRARY_PATH=/usr/lib/gcc/aarch64-linux-gnu/5/:/usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu/:/usr/lib/gcc/aarch64-linux-gnu/5/../../../../lib/:/lib/aarch64-linux-gnu/:/lib/../lib/:/usr/lib/aarch64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/aarch64-linux-gnu/5/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_73318' '-rdynamic' '-shared-libgcc' '-mlittle-endian' '-mabi=lp64'
- /usr/lib/gcc/aarch64-linux-gnu/5/collect2 -plugin /usr/lib/gcc/aarch64-linux-gnu/5/liblto_plugin.so -plugin-opt=/usr/lib/gcc/aarch64-linux-gnu/5/lto-wrapper -plugin-opt=-fresolution=/tmp/cci02lfL.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ --build-id --eh-frame-hdr --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib/ld-linux-aarch64.so.1 -X -EL -maarch64linux --fix-cortex-a53-843419 -z relro -o cmTC_73318 /usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu/crt1.o /usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu/crti.o /usr/lib/gcc/aarch64-linux-gnu/5/crtbegin.o -L/usr/lib/gcc/aarch64-linux-gnu/5 -L/usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu -L/usr/lib/gcc/aarch64-linux-gnu/5/../../../../lib -L/lib/aarch64-linux-gnu -L/lib/../lib -L/usr/lib/aarch64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/aarch64-linux-gnu/5/../../.. CMakeFiles/cmTC_73318.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/aarch64-linux-gnu/5/crtend.o /usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu/crtn.o
-make[1]: Leaving directory '/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp'
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_c6c35' '-rdynamic' '-shared-libgcc' '-mlittle-endian' '-mabi=lp64'
+ /usr/lib/gcc/aarch64-linux-gnu/5/collect2 -plugin /usr/lib/gcc/aarch64-linux-gnu/5/liblto_plugin.so -plugin-opt=/usr/lib/gcc/aarch64-linux-gnu/5/lto-wrapper -plugin-opt=-fresolution=/tmp/ccJ4trjw.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ --build-id --eh-frame-hdr --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib/ld-linux-aarch64.so.1 -X -EL -maarch64linux --fix-cortex-a53-843419 -z relro -o cmTC_c6c35 /usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu/crt1.o /usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu/crti.o /usr/lib/gcc/aarch64-linux-gnu/5/crtbegin.o -L/usr/lib/gcc/aarch64-linux-gnu/5 -L/usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu -L/usr/lib/gcc/aarch64-linux-gnu/5/../../../../lib -L/lib/aarch64-linux-gnu -L/lib/../lib -L/usr/lib/aarch64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/aarch64-linux-gnu/5/../../.. CMakeFiles/cmTC_c6c35.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/aarch64-linux-gnu/5/crtend.o /usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu/crtn.o
+make[1]: Leaving directory '/home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp'
 
 
 Parsed CXX implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
-  ignore line: [Change Dir: /home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp]
+  ignore line: [Change Dir: /home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_73318/fast"]
-  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_73318.dir/build.make CMakeFiles/cmTC_73318.dir/build]
-  ignore line: [make[1]: Entering directory '/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp']
-  ignore line: [Building CXX object CMakeFiles/cmTC_73318.dir/CMakeCXXCompilerABI.cpp.o]
-  ignore line: [/usr/bin/c++      -o CMakeFiles/cmTC_73318.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.5/Modules/CMakeCXXCompilerABI.cpp]
-  ignore line: [Linking CXX executable cmTC_73318]
-  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_73318.dir/link.txt --verbose=1]
-  ignore line: [/usr/bin/c++       -v CMakeFiles/cmTC_73318.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_73318 -rdynamic  ]
+  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_c6c35/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_c6c35.dir/build.make CMakeFiles/cmTC_c6c35.dir/build]
+  ignore line: [make[1]: Entering directory '/home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp']
+  ignore line: [Building CXX object CMakeFiles/cmTC_c6c35.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/usr/bin/c++      -o CMakeFiles/cmTC_c6c35.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.5/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Linking CXX executable cmTC_c6c35]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c6c35.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/c++       -v CMakeFiles/cmTC_c6c35.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_c6c35 -rdynamic  ]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/usr/bin/c++]
   ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/aarch64-linux-gnu/5/lto-wrapper]
@@ -272,13 +272,13 @@ Parsed CXX implicit link information from above output:
   ignore line: [gcc version 5.4.0 20160609 (Ubuntu/Linaro 5.4.0-6ubuntu1~16.04.11) ]
   ignore line: [COMPILER_PATH=/usr/lib/gcc/aarch64-linux-gnu/5/:/usr/lib/gcc/aarch64-linux-gnu/5/:/usr/lib/gcc/aarch64-linux-gnu/:/usr/lib/gcc/aarch64-linux-gnu/5/:/usr/lib/gcc/aarch64-linux-gnu/]
   ignore line: [LIBRARY_PATH=/usr/lib/gcc/aarch64-linux-gnu/5/:/usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu/:/usr/lib/gcc/aarch64-linux-gnu/5/../../../../lib/:/lib/aarch64-linux-gnu/:/lib/../lib/:/usr/lib/aarch64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/aarch64-linux-gnu/5/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_73318' '-rdynamic' '-shared-libgcc' '-mlittle-endian' '-mabi=lp64']
-  link line: [ /usr/lib/gcc/aarch64-linux-gnu/5/collect2 -plugin /usr/lib/gcc/aarch64-linux-gnu/5/liblto_plugin.so -plugin-opt=/usr/lib/gcc/aarch64-linux-gnu/5/lto-wrapper -plugin-opt=-fresolution=/tmp/cci02lfL.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ --build-id --eh-frame-hdr --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib/ld-linux-aarch64.so.1 -X -EL -maarch64linux --fix-cortex-a53-843419 -z relro -o cmTC_73318 /usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu/crt1.o /usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu/crti.o /usr/lib/gcc/aarch64-linux-gnu/5/crtbegin.o -L/usr/lib/gcc/aarch64-linux-gnu/5 -L/usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu -L/usr/lib/gcc/aarch64-linux-gnu/5/../../../../lib -L/lib/aarch64-linux-gnu -L/lib/../lib -L/usr/lib/aarch64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/aarch64-linux-gnu/5/../../.. CMakeFiles/cmTC_73318.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/aarch64-linux-gnu/5/crtend.o /usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_c6c35' '-rdynamic' '-shared-libgcc' '-mlittle-endian' '-mabi=lp64']
+  link line: [ /usr/lib/gcc/aarch64-linux-gnu/5/collect2 -plugin /usr/lib/gcc/aarch64-linux-gnu/5/liblto_plugin.so -plugin-opt=/usr/lib/gcc/aarch64-linux-gnu/5/lto-wrapper -plugin-opt=-fresolution=/tmp/ccJ4trjw.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ --build-id --eh-frame-hdr --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib/ld-linux-aarch64.so.1 -X -EL -maarch64linux --fix-cortex-a53-843419 -z relro -o cmTC_c6c35 /usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu/crt1.o /usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu/crti.o /usr/lib/gcc/aarch64-linux-gnu/5/crtbegin.o -L/usr/lib/gcc/aarch64-linux-gnu/5 -L/usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu -L/usr/lib/gcc/aarch64-linux-gnu/5/../../../../lib -L/lib/aarch64-linux-gnu -L/lib/../lib -L/usr/lib/aarch64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/aarch64-linux-gnu/5/../../.. CMakeFiles/cmTC_c6c35.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/aarch64-linux-gnu/5/crtend.o /usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu/crtn.o]
     arg [/usr/lib/gcc/aarch64-linux-gnu/5/collect2] ==> ignore
     arg [-plugin] ==> ignore
     arg [/usr/lib/gcc/aarch64-linux-gnu/5/liblto_plugin.so] ==> ignore
     arg [-plugin-opt=/usr/lib/gcc/aarch64-linux-gnu/5/lto-wrapper] ==> ignore
-    arg [-plugin-opt=-fresolution=/tmp/cci02lfL.res] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccJ4trjw.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
@@ -298,7 +298,7 @@ Parsed CXX implicit link information from above output:
     arg [--fix-cortex-a53-843419] ==> ignore
     arg [-zrelro] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_73318] ==> ignore
+    arg [cmTC_c6c35] ==> ignore
     arg [/usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu/crt1.o] ==> ignore
     arg [/usr/lib/gcc/aarch64-linux-gnu/5/../../../aarch64-linux-gnu/crti.o] ==> ignore
     arg [/usr/lib/gcc/aarch64-linux-gnu/5/crtbegin.o] ==> ignore
@@ -310,7 +310,7 @@ Parsed CXX implicit link information from above output:
     arg [-L/usr/lib/aarch64-linux-gnu] ==> dir [/usr/lib/aarch64-linux-gnu]
     arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
     arg [-L/usr/lib/gcc/aarch64-linux-gnu/5/../../..] ==> dir [/usr/lib/gcc/aarch64-linux-gnu/5/../../..]
-    arg [CMakeFiles/cmTC_73318.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [CMakeFiles/cmTC_c6c35.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
     arg [-lstdc++] ==> lib [stdc++]
     arg [-lm] ==> lib [m]
     arg [-lgcc_s] ==> lib [gcc_s]
@@ -340,17 +340,17 @@ Parsed CXX implicit link information from above output:
 
 
 Detecting CXX [-std=c++14] compiler features compiled with the following output:
-Change Dir: /home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp
+Change Dir: /home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_8e563/fast"
-/usr/bin/make -f CMakeFiles/cmTC_8e563.dir/build.make CMakeFiles/cmTC_8e563.dir/build
-make[1]: Entering directory '/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_8e563.dir/feature_tests.cxx.o
-/usr/bin/c++     -std=c++14 -o CMakeFiles/cmTC_8e563.dir/feature_tests.cxx.o -c "/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/feature_tests.cxx"
-Linking CXX executable cmTC_8e563
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8e563.dir/link.txt --verbose=1
-/usr/bin/c++        CMakeFiles/cmTC_8e563.dir/feature_tests.cxx.o  -o cmTC_8e563 -rdynamic 
-make[1]: Leaving directory '/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_60aa5/fast"
+/usr/bin/make -f CMakeFiles/cmTC_60aa5.dir/build.make CMakeFiles/cmTC_60aa5.dir/build
+make[1]: Entering directory '/home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_60aa5.dir/feature_tests.cxx.o
+/usr/bin/c++     -std=c++14 -o CMakeFiles/cmTC_60aa5.dir/feature_tests.cxx.o -c "/home/nvidia/Mago/depth sensing/build/CMakeFiles/feature_tests.cxx"
+Linking CXX executable cmTC_60aa5
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_60aa5.dir/link.txt --verbose=1
+/usr/bin/c++        CMakeFiles/cmTC_60aa5.dir/feature_tests.cxx.o  -o cmTC_60aa5 -rdynamic 
+make[1]: Leaving directory '/home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp'
 
 
     Feature record: CXX_FEATURE:1cxx_aggregate_default_initializers
@@ -413,17 +413,17 @@ make[1]: Leaving directory '/home/nvidia/tools/vscode/depth sensing/build/CMakeF
 
 
 Detecting CXX [-std=c++11] compiler features compiled with the following output:
-Change Dir: /home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp
+Change Dir: /home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_f4cf4/fast"
-/usr/bin/make -f CMakeFiles/cmTC_f4cf4.dir/build.make CMakeFiles/cmTC_f4cf4.dir/build
-make[1]: Entering directory '/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_f4cf4.dir/feature_tests.cxx.o
-/usr/bin/c++     -std=c++11 -o CMakeFiles/cmTC_f4cf4.dir/feature_tests.cxx.o -c "/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/feature_tests.cxx"
-Linking CXX executable cmTC_f4cf4
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f4cf4.dir/link.txt --verbose=1
-/usr/bin/c++        CMakeFiles/cmTC_f4cf4.dir/feature_tests.cxx.o  -o cmTC_f4cf4 -rdynamic 
-make[1]: Leaving directory '/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_3c67c/fast"
+/usr/bin/make -f CMakeFiles/cmTC_3c67c.dir/build.make CMakeFiles/cmTC_3c67c.dir/build
+make[1]: Entering directory '/home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_3c67c.dir/feature_tests.cxx.o
+/usr/bin/c++     -std=c++11 -o CMakeFiles/cmTC_3c67c.dir/feature_tests.cxx.o -c "/home/nvidia/Mago/depth sensing/build/CMakeFiles/feature_tests.cxx"
+Linking CXX executable cmTC_3c67c
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3c67c.dir/link.txt --verbose=1
+/usr/bin/c++        CMakeFiles/cmTC_3c67c.dir/feature_tests.cxx.o  -o cmTC_3c67c -rdynamic 
+make[1]: Leaving directory '/home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp'
 
 
     Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
@@ -486,17 +486,17 @@ make[1]: Leaving directory '/home/nvidia/tools/vscode/depth sensing/build/CMakeF
 
 
 Detecting CXX [-std=c++98] compiler features compiled with the following output:
-Change Dir: /home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp
+Change Dir: /home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_8a44f/fast"
-/usr/bin/make -f CMakeFiles/cmTC_8a44f.dir/build.make CMakeFiles/cmTC_8a44f.dir/build
-make[1]: Entering directory '/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_8a44f.dir/feature_tests.cxx.o
-/usr/bin/c++     -std=c++98 -o CMakeFiles/cmTC_8a44f.dir/feature_tests.cxx.o -c "/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/feature_tests.cxx"
-Linking CXX executable cmTC_8a44f
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8a44f.dir/link.txt --verbose=1
-/usr/bin/c++        CMakeFiles/cmTC_8a44f.dir/feature_tests.cxx.o  -o cmTC_8a44f -rdynamic 
-make[1]: Leaving directory '/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_cc09b/fast"
+/usr/bin/make -f CMakeFiles/cmTC_cc09b.dir/build.make CMakeFiles/cmTC_cc09b.dir/build
+make[1]: Entering directory '/home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_cc09b.dir/feature_tests.cxx.o
+/usr/bin/c++     -std=c++98 -o CMakeFiles/cmTC_cc09b.dir/feature_tests.cxx.o -c "/home/nvidia/Mago/depth sensing/build/CMakeFiles/feature_tests.cxx"
+Linking CXX executable cmTC_cc09b
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_cc09b.dir/link.txt --verbose=1
+/usr/bin/c++        CMakeFiles/cmTC_cc09b.dir/feature_tests.cxx.o  -o cmTC_cc09b -rdynamic 
+make[1]: Leaving directory '/home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp'
 
 
     Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
@@ -557,30 +557,30 @@ make[1]: Leaving directory '/home/nvidia/tools/vscode/depth sensing/build/CMakeF
     Feature record: CXX_FEATURE:0cxx_variadic_macros
     Feature record: CXX_FEATURE:0cxx_variadic_templates
 Determining if the include file pthread.h exists passed with the following output:
-Change Dir: /home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp
+Change Dir: /home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_0207c/fast"
-/usr/bin/make -f CMakeFiles/cmTC_0207c.dir/build.make CMakeFiles/cmTC_0207c.dir/build
-make[1]: Entering directory '/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_0207c.dir/CheckIncludeFile.c.o
-/usr/bin/cc     -o CMakeFiles/cmTC_0207c.dir/CheckIncludeFile.c.o   -c "/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c"
-Linking C executable cmTC_0207c
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0207c.dir/link.txt --verbose=1
-/usr/bin/cc       CMakeFiles/cmTC_0207c.dir/CheckIncludeFile.c.o  -o cmTC_0207c -rdynamic 
-make[1]: Leaving directory '/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_fac88/fast"
+/usr/bin/make -f CMakeFiles/cmTC_fac88.dir/build.make CMakeFiles/cmTC_fac88.dir/build
+make[1]: Entering directory '/home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_fac88.dir/CheckIncludeFile.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_fac88.dir/CheckIncludeFile.c.o   -c "/home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c"
+Linking C executable cmTC_fac88
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fac88.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_fac88.dir/CheckIncludeFile.c.o  -o cmTC_fac88 -rdynamic 
+make[1]: Leaving directory '/home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp'
 
 
 Determining if the function pthread_create exists in the pthread passed with the following output:
-Change Dir: /home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp
+Change Dir: /home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_ffcd1/fast"
-/usr/bin/make -f CMakeFiles/cmTC_ffcd1.dir/build.make CMakeFiles/cmTC_ffcd1.dir/build
-make[1]: Entering directory '/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_ffcd1.dir/CheckFunctionExists.c.o
-/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_ffcd1.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.5/Modules/CheckFunctionExists.c
-Linking C executable cmTC_ffcd1
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ffcd1.dir/link.txt --verbose=1
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_ffcd1.dir/CheckFunctionExists.c.o  -o cmTC_ffcd1 -rdynamic -lpthread 
-make[1]: Leaving directory '/home/nvidia/tools/vscode/depth sensing/build/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_3b3a1/fast"
+/usr/bin/make -f CMakeFiles/cmTC_3b3a1.dir/build.make CMakeFiles/cmTC_3b3a1.dir/build
+make[1]: Entering directory '/home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_3b3a1.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_3b3a1.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.5/Modules/CheckFunctionExists.c
+Linking C executable cmTC_3b3a1
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3b3a1.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_3b3a1.dir/CheckFunctionExists.c.o  -o cmTC_3b3a1 -rdynamic -lpthread 
+make[1]: Leaving directory '/home/nvidia/Mago/depth sensing/build/CMakeFiles/CMakeTmp'
 
 

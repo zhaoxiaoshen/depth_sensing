@@ -6,5 +6,5 @@ CXX_FLAGS =   -Wno-write-strings -fpermissive -std=c++11 -g -O3
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/usr/local/zed/include -I/usr/local/cuda-9.0/include -I"/home/nvidia/tools/vscode/depth sensing/include" -isystem /opt/ros/kinetic/include/opencv-3.3.1-dev -isystem /opt/ros/kinetic/include/opencv-3.3.1-dev/opencv 
+CXX_INCLUDES = -I/usr/local/zed/include -I/usr/local/cuda-9.0/include -I"/home/nvidia/Mago/depth sensing/include" -isystem /usr/include/opencv 
 

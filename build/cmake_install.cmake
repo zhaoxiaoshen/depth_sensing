@@ -1,4 +1,4 @@
-# Install script for directory: /home/nvidia/tools/vscode/depth sensing
+# Install script for directory: /home/nvidia/Mago/depth sensing
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/nvidia/tools/vscode/depth sensing/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/nvidia/Mago/depth sensing/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

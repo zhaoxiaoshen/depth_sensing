@@ -108,6 +108,14 @@ void lockFinder::on_Matching(int, void* info,std::vector<cv::Mat>& imgPro)
 	matchInfo->srcImg.copyTo(srcImageS);
 	cv::Mat templateImage;
 	matchInfo->templateImg.copyTo(templateImage);
+	
+	cv::Mat imageShowRoi;
+	srcImage.copyTo(imageShowRoi);
+	cv::rectangle(imageShowRoi, cv::Point(matchInfo->roiSet.x, matchInfo->roiSet.y),
+		cv::Point(matchInfo->roiSet.x + matchInfo->roiSet.width, matchInfo->roiSet.y + matchInfo->roiSet.height),
+		cv::Scalar(0, 0, 255), 2, 8, 0);
+	//cv::imwrite("roi_set.jpg",imageShowRoi);
+	
 	srcImage = srcImage(matchInfo->roiSet);
 	cv::imwrite("roi_imag.jpg",srcImage);
 	//【2】初始化用于结果输出的矩阵

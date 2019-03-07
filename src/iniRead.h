@@ -3,6 +3,7 @@
 
 #include <map>
 #include <string.h>
+#include <vector>
 
 using namespace std;
  
@@ -31,6 +32,8 @@ public:
     // 析够函数
     virtual ~CIni();
 public:
+    //获取主键下的所有字符串
+    INI_RES GetSection(const char *mAttr, std::vector<std::string>& section);
     //获取整形的键值
     int  GetInt(const char* mAttr, const char* cAttr );
     //获取浮点型键值

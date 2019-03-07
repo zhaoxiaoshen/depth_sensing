@@ -117,6 +117,29 @@ INI_RES CIni::CloseFile()
 }
 
 /******************************************************************************
+* 功  能：获取[SECTION]下的所有键值的字符串
+* 参  数：
+*  char* mAttr  输入参数    主键
+*  char* value  输出参数 子键键值
+* 返回值：
+* 备  注：
+******************************************************************************/
+INI_RES CIni::GetSection(const char *mAttr, std::vector<std::string>& section)
+{
+
+    MAINKEYMAP::iterator mainKeyIte = m_Map.find(mAttr);
+    if (mainKeyIte == m_Map.end())
+        return INI_NO_ATTR;
+    
+    KEYMAP::iterator keyIte = mainKeyIte->second.begin();
+    for (; keyIte!=mainKeyIte->second.end(); keyIte++)
+    {
+        section.push_back(keyIte->second);
+    }
+    return INI_SUCCESS;
+}
+
+/******************************************************************************
 * 功  能：获取[SECTION]下的某一个键值的字符串
 * 参  数：
 *  char* mAttr  输入参数    主键

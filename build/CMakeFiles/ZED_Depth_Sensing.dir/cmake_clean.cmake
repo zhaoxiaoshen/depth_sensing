@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/ZED_Depth_Sensing.dir/src/plcConnect.o"
-  "CMakeFiles/ZED_Depth_Sensing.dir/src/main.o"
   "CMakeFiles/ZED_Depth_Sensing.dir/src/openSocket.o"
+  "CMakeFiles/ZED_Depth_Sensing.dir/src/main.o"
   "CMakeFiles/ZED_Depth_Sensing.dir/src/lockFinder.o"
   "CMakeFiles/ZED_Depth_Sensing.dir/src/GLViewer.o"
   "CMakeFiles/ZED_Depth_Sensing.dir/src/iniRead.o"

@@ -7,6 +7,7 @@
 ******************************************************************************/
 CIni::CIni()
 {
+	m_bOutput = false;
     memset(m_szKey, 0, sizeof(m_szKey));
     m_fp = NULL;
 }
@@ -17,6 +18,25 @@ CIni::CIni()
 * 返回值：无
 * 备  注：
 ******************************************************************************/
+
+void CIni::EnableOuput(bool bFlag)
+{
+	m_bOutput = bFlag;
+}
+void CIni::OutputAll()
+{
+	if (m_bOutput)
+	{
+		for (auto it = m_Map.begin(); it != m_Map.end(); it++)
+		{
+			printf("Section %s\r\n", it->first.c_str());
+			for (auto itKey = it->second.begin(); itKey != it->second.end(); itKey++)
+			{
+				printf("\t%s = %s\r\n", itKey->first.c_str(), itKey->second.c_str());
+			}
+		}
+	}
+}
 
 CIni::~CIni()
 {
@@ -95,8 +115,10 @@ INI_RES CIni::OpenFile(const char *pathName)
     //插入最后一次主键
     m_Map[szLastMainKey] = mLastMap;
 
+	OutputAll();
     return INI_SUCCESS;
 }
+
 
 /******************************************************************************
 * 功  能：关闭文件函数
@@ -148,16 +170,27 @@ INI_RES CIni::GetSection(const char *mAttr, std::vector<std::string>& section)
 * 返回值：
 * 备  注：
 ******************************************************************************/
-INI_RES CIni::GetKey(const char *mAttr, const char *cAttr, char *pValue)
+INI_RES CIni::GetKey(const char *szSection, const char *szKey, char *pValue)
 {
-
-    MAINKEYMAP::iterator mainKeyIte = m_Map.find(mAttr);
-    if (mainKeyIte == m_Map.end())
-        return INI_NO_ATTR;
-
-    KEYMAP::iterator keyIte = mainKeyIte->second.find(cAttr);
-    if (keyIte == mainKeyIte->second.end())
-        return INI_NO_ATTR;
+	//printf("%s Section:%s\tszKey = %s.\n", __PRETTY_FUNCTION__, szSection, szKey);
+    MAINKEYMAP::iterator mainKeyIte = m_Map.find(szSection);
+	if (mainKeyIte == m_Map.end())
+	{
+		if (m_bOutput)
+		{
+			printf("Can't find section '%s'.\r\n", szSection);
+		}
+		return INI_NO_ATTR;
+	}
+	
+	
+    KEYMAP::iterator keyIte = mainKeyIte->second.find(szKey);
+	if (keyIte == mainKeyIte->second.end())
+	{
+		if (m_bOutput)
+			printf("Can't find Key '%s'.\n", szKey);
+		return INI_NO_ATTR;
+	}  
 
     strcpy(pValue, keyIte->second.c_str());
 
@@ -172,13 +205,12 @@ INI_RES CIni::GetKey(const char *mAttr, const char *cAttr, char *pValue)
 * 返回值：正常则返回对应的数值 未读取成功则返回0(键值本身为0不冲突)
 * 备  注：
 ******************************************************************************/
-int CIni::GetInt(const char *mAttr, const char *cAttr)
+int CIni::GetInt(const char *szSection, const char *szKey)
 {
     int nRes = 0;
-
     memset(m_szKey, 0, sizeof(m_szKey));
 
-    if (INI_SUCCESS == GetKey(mAttr, cAttr, m_szKey))
+    if (INI_SUCCESS == GetKey(szSection, szKey, m_szKey))
     {
         nRes = atoi(m_szKey);
     }

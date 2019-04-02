@@ -53,6 +53,8 @@ lockFinder.h
 /home/nvidia/Mago/depth sensing/src/lockFinder.h
 
 /home/nvidia/Mago/depth sensing/src/lockFinder.h
+map
+-
 opencv2/opencv.hpp
 -
 opencv2/highgui/highgui.hpp
@@ -88,6 +90,8 @@ vector
 time.h
 -
 unistd.h
+-
+atomic
 -
 plcConnect.h
 /home/nvidia/Mago/depth sensing/src/plcConnect.h

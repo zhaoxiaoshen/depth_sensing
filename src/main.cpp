@@ -18,9 +18,17 @@
 #include <vector>
 #include <time.h>
 #include <unistd.h>
-
+#include <atomic>
 // plc connect 
 #include "plcConnect.h"
+
+#define CAM_RUNING_MAX_NUM    2
+
+#define _X		0
+#define _Y		1
+#define _Z		2
+#define SeaSide		1
+#define LandSide	0
 
 // Using std and sl namespaces
 using namespace std;
@@ -33,9 +41,10 @@ sl::Mat point_cloud;
 std::thread zed_callback;
 int width, height;
 bool quit;
+std::atomic<int> cameraRunNum (0);
 
 // Point cloud viewer
-GLViewer viewer;
+//GLViewer viewer;
 
 float m_fResultX;
 float m_fResultY;
@@ -45,24 +54,15 @@ float m_fResultXLive;
 float m_fResultYLive;
 float m_fResultZLive;
 
-typedef struct detectInfoSt{
-    float roi_x;
-    float roi_y;
-    float roi_width;
-    float roi_height; //图像百分比
-    int camera_sn;
-
-    std::string templatePath;
-    std::string videoReadPath;
-    float result[3]; //cloudPoint xyz
-    int db;
-    int address_r;
-    int offset_r;
-    int len_r;
-    int address_w;
-    int offset_w;
-    int len_w;
-}detectInfoSt;
+struct CoordinateBuffer
+{
+	unsigned char 	nXDirection;
+	unsigned char	nXValue;
+	unsigned char	nYDirection;
+	unsigned char	nYValue;
+	unsigned char	nZDirection;
+	unsigned char	nZValue;
+};
 
 // Sample functions
 void startZED();
@@ -70,8 +70,9 @@ void *run(void *arg);
 void close();
 
 void windowInit();
-void cameraOpen(zedImage& processor, detectInfoSt detectInfo);
+void cameraOpen(zedImage *processor, int cameraIndex);
 void cameraClose();
+#define EnablePLC	(1)
 
 static void stringSplit(const std::string& src, const std::string& separator, std::vector<std::string>& dest)
 {
@@ -97,22 +98,51 @@ static void stringSplit(const std::string& src, const std::string& separator, st
 
 static void  configInit(detectInfoSt& detectInfo, CIni& iniFile)
 {
+	printf("%s\n", __PRETTY_FUNCTION__);
+	detectInfo.camera_sn = iniFile.GetInt("CAMERA", "sn");
+	printf("Camera SN = %d.\n", detectInfo.camera_sn);
     detectInfo.roi_x = iniFile.GetFloat("ROI_SET", "x");
     detectInfo.roi_y = iniFile.GetFloat("ROI_SET", "y");
     detectInfo.roi_height = iniFile.GetFloat("ROI_SET", "height");
     detectInfo.roi_width = iniFile.GetFloat("ROI_SET", "width");
-    detectInfo.templatePath = iniFile.GetStr("TEMPLATE_IMAGE", "path");
-    detectInfo.camera_sn = iniFile.GetInt("CAMERA", "sn");
+	detectInfo.nDetectStep = iniFile.GetInt("ROI_SET", "Step");
+	printf("%s detect step = %d \r\n", __PRETTY_FUNCTION__, detectInfo.nDetectStep);
+    //detectInfo.templatePath = iniFile.GetStr("TEMPLATE_IMAGE", "path");
+	iniFile.GetSection("TEMPLATE_IMAGE", detectInfo.templatePath);
+	printf("Template Array Size = %d.\n",(int)detectInfo.templatePath.size());
+    for (unsigned int i = 0; i < detectInfo.templatePath.size(); i++)
+    {
+        printf("template image: %s \n", detectInfo.templatePath[i].c_str());
+    }
+    //detectInfo.camera_sn = 12224;
+	//detectInfo.camera_sn = 18711;
+	//detectInfo.camera_sn = 21057;
+	//detectInfo.camera_sn = 21098;
+   
+	detectInfo.nInstalledPos = iniFile.GetInt("CAMERA", "InstalledPosition");
+	printf("InstalledPosition = %s\r\n",(detectInfo.nInstalledPos == 1)?"seaside":"landside");
+	
     detectInfo.videoReadPath = iniFile.GetStr("VIDEO","read_path");
-    printf("config read roi x:%f y:%f width:%f height:%f \n template path:%s\n camera sn:%d\n video read:%s\n",
+    printf("config read roi x:%f y:%f width:%f height:%f \n camera sn:%d\n video read:%s\n",
         detectInfo.roi_x, detectInfo.roi_y, detectInfo.roi_width, detectInfo.roi_height,
-        detectInfo.templatePath.c_str(), detectInfo.camera_sn, detectInfo.videoReadPath.c_str());
+        detectInfo.camera_sn, detectInfo.videoReadPath.c_str());
     detectInfo.db = iniFile.GetInt("DB_READ_SET", "db");
-    detectInfo.address_r = iniFile.GetInt("DB_READ_SET", "address");
+    detectInfo.address_r = iniFile.GetInt("DB_READ_SET", "address");  
     detectInfo.address_w = iniFile.GetInt("DB_RESULT_SET", "address");
     detectInfo.offset_r = iniFile.GetInt("DB_READ_SET", "offset");
+    detectInfo.resolution = iniFile.GetInt("IMAGE_RESOLUTION","resolution");
+    printf ("resolution:%d \n", detectInfo.resolution);
     printf("db:%d address read:%d offset:%d address write:%d \n",
             detectInfo.db, detectInfo.address_r, detectInfo.offset_r,  detectInfo.address_w);
+    detectInfo.address_s = iniFile.GetInt("DB_WRITE_SET", "address");
+    detectInfo.offset_s = iniFile.GetInt("DB_WRITE_SET", "offset");
+    printf("db:%d address status write:%d offset:%d \n",
+            detectInfo.db, detectInfo.address_s, detectInfo.offset_s);
+    detectInfo.calibratePos[_X] = iniFile.GetFloat("CALIBRATION_POS", "x");
+    detectInfo.calibratePos[_Y] = iniFile.GetFloat("CALIBRATION_POS", "y");
+    detectInfo.calibratePos[_Z] = iniFile.GetFloat("CALIBRATION_POS", "z");
+    printf("calibration offset x: %f y: %f z: %f \n",
+        detectInfo.calibratePos[_X], detectInfo.calibratePos[_Y], detectInfo.calibratePos[_Z]);
 }
  
 std::string getTime(void)
@@ -133,14 +163,30 @@ std::string getTime(void)
 std::vector<detectInfoSt> detectInfoVec;
 std::vector<zedImage*> zedProcessorVec;
 
+void cameraClose(int index)
+{
+    printf("%s camra close index:%d \n", getTime().c_str(), index);
+    zedProcessorVec[index]->zedClose();
+    //sleep(1);
+    //detectInfoVec[index].cameraStatus = false;
+    cameraRunNum --;
+}
+
 void *cameraProcess(void *argv)
 {
     int cameraIndex = *(int *)argv;
-    detectInfoSt detectInfo;
-    zedImage* zedProcessor;
-    detectInfo = detectInfoVec[cameraIndex];
+	zedImage* zedProcessor;
     zedProcessor = zedProcessorVec[cameraIndex];
-    printf("camera running index %d\n", cameraIndex);
+	detectInfoSt &detectInfo = zedProcessor->detectInfo;
+   
+    int cameraRunningCount = cameraRunNum;
+    printf("\n%s camera running index %d runNum:%d \n", getTime().c_str(),
+        cameraIndex, cameraRunningCount);
+	if (!zedProcessor->getCameraStatus())
+	{
+        cameraOpen(zedProcessor, cameraIndex); //"" for live
+        usleep(500*1000); //500ms
+    }
     cv::Mat image, imageR;
     sl::float4 pointResult;
     pointResult.x = 0;
@@ -149,6 +195,7 @@ void *cameraProcess(void *argv)
     if (zedProcessor->zedImageGet(image, VIEW_LEFT))
     {
         printf("can not read image \n");
+        cameraClose(cameraIndex);
         return NULL;
     }
     if (!image.empty())
@@ -156,7 +203,11 @@ void *cameraProcess(void *argv)
         image.copyTo(imageR);
     }
     else
+    {
+		printf("%s Get a empty image.X X X X X X.\r\n", __PRETTY_FUNCTION__);
+        cameraClose(cameraIndex);
         return NULL;
+    }
     std::vector<cv::Mat> imgPro;
 
     printf("image match begin \n");
@@ -173,30 +224,87 @@ void *cameraProcess(void *argv)
 	
     cv::cvtColor(imageR, imageR, CV_BGR2GRAY);
     printf("image size cols %d rows %d\n", imageR.cols, imageR.rows);
-    //cv::imshow("src_image1", imageR);
+    image.release();
+    imageR.release();
 
-    //cv::waitKey(5);
-   
-    //cv::imwrite(dstNameSave, imageR);
+    detectInfo.distance[_X] = pointResult.x - detectInfo.calibratePos[_X];
+    detectInfo.distance[_Y] = pointResult.y - detectInfo.calibratePos[_Y];
+    detectInfo.distance[_Z] = pointResult.z - detectInfo.calibratePos[_Z];
+    printf("%s: index:%d point cloud x %f  y %f  z %f \n", getTime().c_str(), cameraIndex, pointResult.x, pointResult.y, pointResult.z);
+	printf("%s: index:%d defference of distance:x %f  y %f  z %f \n", getTime().c_str(), cameraIndex, detectInfo.distance[_X], detectInfo.distance[_Y], detectInfo.distance[_Z]);
+    //delete (int *)argv;
+    //== write result
+    unsigned char value = 0x01;
+    unsigned char buffer[255] = {0};
+	
+	CoordinateBuffer Result;
+	Result.nYDirection = detectInfo.distance[_Y] > 0 ? 1 : 0;
+	Result.nYValue = (unsigned char)abs(detectInfo.distance[_Y]);
+	if (!Result.nYValue)
+		Result.nYValue = 1;
 
-    /*       if (imgPro.size() >= 4)
-        {
-            imshow("result1", imgPro[1]);
-            imshow("result2", imgPro[2]);
-            imshow("result3", imgPro[3]);
-        }
-*/
-    printf("%s: point cloud x %f  y %f  z %f \n", getTime().c_str(), pointResult.x, pointResult.y, pointResult.z);
-    delete (int *)argv;
+	if (detectInfo.nInstalledPos == SeaSide)
+	{
+		// 面向海侧右为正
+		Result.nXDirection = detectInfo.distance[_X] > 0 ? 0 : 1;
+		Result.nXValue = (unsigned char)abs(detectInfo.distance[_X]);
+		if (!Result.nXValue)		//若差量为0，则给个最小值
+			Result.nXValue = 1;
+
+		// 面向海侧前为正
+		Result.nZDirection = detectInfo.distance[_Z] > 0 ? 0 : 1;
+		Result.nZValue = (unsigned char)abs(detectInfo.distance[_Z]);
+		if (!Result.nZValue)
+			Result.nZValue = 1;
+	}
+	else
+	{
+		// 面向海侧右为正
+		Result.nXDirection = detectInfo.distance[_X] > 0 ? 1 : 0;
+		Result.nXValue = (unsigned char)abs(detectInfo.distance[_X]);
+		if (!Result.nXValue)		//若差量为0，则给个最小值
+			Result.nXValue = 1;
+
+		// 面向海侧前为正
+		Result.nZDirection = detectInfo.distance[_Z] > 0 ? 1 : 0;
+		Result.nZValue = (unsigned char)abs(detectInfo.distance[_Z]);
+		if (!Result.nZValue)
+			Result.nZValue = 1;
+
+	}
+	printf("X Direction=%s\tValue = %d.\n", (Result.nXDirection == 1) ? "Rightside" : "Leftside",Result.nXValue);
+	printf("Y Direction=%s\tValue = %d.\n", (Result.nYDirection == 1) ? "Down" : "Up",Result.nYValue);
+	printf("Z Direction=%s\tValue = %d.\n", (Result.nZDirection == 1) ? "SeaSide" : "Lanside",Result.nZValue);
+//     buffer[0] = ((int)(pointResult.x) & 0xff00) >> 8;
+//     buffer[1] = ((int)(pointResult.x) & 0x00ff);
+//     buffer[2] = ((int)(pointResult.y) & 0xff00) >> 8;
+//     buffer[3] = ((int)(pointResult.y) & 0x00ff);
+//     buffer[4] = ((int)(pointResult.z) & 0xff00) >> 8;
+//     buffer[5] = ((int)(pointResult.z) & 0x00ff);
+
+	dataWrite(detectInfo.db, detectInfo.address_w, 6, &Result);
+
+    int nRes = dataRead(detectInfo.db, detectInfo.address_s, 1, buffer);
+    if (!nRes)
+    {
+        value = 0x01;
+        value <<= detectInfo.offset_s;
+        buffer[0] |= value;
+        dataWrite(detectInfo.db, detectInfo.address_s, 1, buffer);
+    }
+
     sl::sleep_ms(10);
+    //cameraClose(cameraIndex);
+    //printf("%s camera stop index %d\n", getTime().c_str(), cameraIndex);
+	printf("%s returned.\r\b", __PRETTY_FUNCTION__);
 }
 
 void zedWorkStart(int index)
 {
     pthread_t tidp;
-    int *cameraIndex = new int(0);
-    *cameraIndex = index;
-    if ((pthread_create(&tidp, NULL, &cameraProcess, cameraIndex) == -1))
+   // int *cameraIndex = new int(0);
+    int cameraIndex = index;
+    if ((pthread_create(&tidp, NULL, &cameraProcess, (void *)&cameraIndex) == -1))
     {
         printf("create zed work error!\n");
         return;
@@ -204,6 +312,28 @@ void zedWorkStart(int index)
     pthread_detach(tidp);
     printf("camera %d start ....\n", index);
     usleep(5000);
+}
+
+void mainCamKeepLive()
+{
+    int cameraOpenNum = zedProcessorVec.size();
+    cameraOpenNum = cameraOpenNum > 2 ? 2 : cameraOpenNum;
+    for (int cameraIndex = 0; cameraIndex < cameraOpenNum; cameraIndex++)
+    {
+		if (!zedProcessorVec[cameraIndex]->getCameraStatus())
+        {
+            cameraOpen(zedProcessorVec[cameraIndex], cameraIndex);
+        }
+        else
+        {
+            cv::Mat image;
+            if (zedProcessorVec[cameraIndex]->zedImageGet(image, VIEW_LEFT))
+            {
+                printf("image update fail\n");
+            }
+            image.release();
+        }
+    }
 }
 
 int main(int argc, char **argv)
@@ -215,76 +345,97 @@ int main(int argc, char **argv)
     std::string plcIp = "127.0.0.1";
 
     CIni iniFile;
+	iniFile.EnableOuput(false);
     if (iniFile.OpenFile("config/General.ini") != INI_SUCCESS)
     {
         printf("read config file General.ini failed!\n");
         return -1;
     }
-    cameraNum = iniFile.GetInt("CAMERA", "num");
-    plcIp = iniFile.GetStr("PLC", "ip");
-    printf("camera num:%d plc ip:%s \n", cameraNum, plcIp.c_str());
-
-
-    // printf("plc connect.... \n");
-    // plcConnect(plcIp);
-    // printf("plc connect end \n");
-    // while (1)
-    // {
-    //     printf("buffer read start \n");
-    //     unsigned char buffer[256] = {0};
-    //     dataRead(501, 0, 2, buffer);
-    //     printf("buffer read :%d \n", buffer[0]);
-    //     sleep (1);
-    //     dataWrite(501, 4, 10, buffer);
-    //     sleep(5);
-    // }
-
-
-    for (int i = 0; i < cameraNum; i++)
-    {
-        detectInfoSt detectInfo;
-        char path[255] = {0};
-        snprintf(path, sizeof(path) - 1, "config/Config_%d.ini", i);
-        if (iniFile.OpenFile(path) != INI_SUCCESS)
-        {
-            printf("read config file %s failed!\n", path);
-            return -1;
-        }
-        else
-        {
-            configInit(detectInfo, iniFile);
-            detectInfoVec.push_back(detectInfo);
-        }
-        // zedImage* zedProcessor = new zedImage();
-        // zedProcessor->templateImageLoad(detectInfo.templatePath);
-        // cameraOpen(*zedProcessor, detectInfo); //"" for live
-        // zedProcessorVec.push_back(zedProcessor);
-    }
+	plcIp = iniFile.GetStr("PLC", "ip");
+	printf("camera num:%d plc ip:%s \n", cameraNum, plcIp.c_str());
+    
+	cameraNum = iniFile.GetInt("CAMERA", "num");	
+	if (cameraNum > 0)
+	{
+		std::vector<std::string> vecCameraConfig;
+		iniFile.GetSection("Config", vecCameraConfig);
+		for (int i = 0; i < cameraNum; i++)
+		{
+			detectInfoSt detectInfo;
+			char path[255] = {0};
+			snprintf(path, sizeof(path) - 1, "config/%s", vecCameraConfig[i].c_str());
+			printf("Camera config file:%s.\n", path);
+			//iniFile.EnableOuput(true);
+			if (iniFile.OpenFile(path) != INI_SUCCESS)
+			{
+				printf("read config file %s failed!\n", path);
+				return -1;
+			}
+			else
+			{
+				zedImage* zedProcessor = new zedImage();
+				configInit(zedProcessor->detectInfo, iniFile);
+				zedProcessor->templateImageLoad(/*detectInfo.templatePath*/);
+				//cameraOpen(*zedProcessor, i); //"" for live
+				zedProcessorVec.push_back(zedProcessor);
+				zedProcessorVec[i]->zedClose();
+			}
+		}
+	}
 
     // windowInit();
-    plcConnect(plcIp);
+	
+	plcConnect(plcIp);
 
     quit = false;
+    unsigned int idleTime = 0;
+    mainCamKeepLive();
     while (1)
     {
         for (int i = 0; i < cameraNum; i++)
         {
+			zedImage* zedProcessor = zedProcessorVec[i];
+			detectInfoSt detectInfo = zedProcessor->detectInfo;
             unsigned char buffer[256] = {0};
-            dataRead(detectInfoVec[i].db, detectInfoVec[i].address_r, 1, buffer);
-            printf("data read :%d db %d address:%d \n", buffer[0],detectInfoVec[i].db,
-                detectInfoVec[i].address_r);
-            unsigned char value = buffer[0] >> detectInfoVec[i].offset_r;
+			int nRes = dataRead(detectInfo.db, detectInfo.address_r, 1, buffer);
+            if (nRes)
+			{
+				usleep(200*1000);
+				continue;
+			} 
+			printf(".");
+            //printf("%s data read :%d db %d address:%d \n", getTime().c_str(), buffer[0], detectInfo.db, detectInfo.address_r);
+            unsigned char value = buffer[0] >> detectInfo.offset_r;
             if ((value & 0x01) == 1)
             {
-                printf("camera %d start\n ", i);
-                value = 0x01;
-                value <<= detectInfoVec[i].offset_r;
-                buffer[0] &= (~value);
-                dataWrite(detectInfoVec[0].db, detectInfoVec[0].address_r, 1, buffer);
+                idleTime = 0;
+                if (cameraRunNum < CAM_RUNING_MAX_NUM || i < CAM_RUNING_MAX_NUM)
+                {
+                    zedImage *zedProcessor;
+                    zedProcessor = zedProcessorVec[i];
+					if (!zedProcessor->getCameraStatus())
+                    {
+                        cameraOpen(zedProcessor, i);			//"" for live
+                        usleep(500 * 1000);                     //500ms
+                    }
+                    value = 0x01;
+                    value <<= detectInfo.offset_r;
+                    buffer[0] &= (~value);
+                    dataWrite(detectInfo.db, detectInfo.address_r, 1, buffer);
+                    zedWorkStart(i);
+                }
             }
-            //zedWorkStart(i);
+            else
+            {
+                idleTime++;
+            }
         }
-        sleep(3);
+        if (idleTime > 30) 
+        {
+            idleTime = 30;
+            mainCamKeepLive();
+        }
+        sleep(1);
     }
 
     /*    while (1)
@@ -304,9 +455,7 @@ int main(int argc, char **argv)
     // Set the display callback
     //glutCloseFunc(close);
     //glutMainLoop();
-    while (1)
-    {
-    }
+
     return 0;
 }
 
@@ -381,7 +530,7 @@ void close()
     zed_callback.join();
 
     // Exit point cloud viewer
-    viewer.exit();
+    //viewer.exit();
 
     // Free buffer and close the ZED
     point_cloud.free(MEM_GPU);
@@ -396,26 +545,42 @@ void windowInit()
     cv::namedWindow("result3", 1);
 }
 
-void cameraOpen(zedImage& processor, detectInfoSt detectInfo)
+void cameraOpen(zedImage *processor, int cameraIndex)
 {
     InitParameters initParameters;
+    detectInfoSt  &detectInfo = processor->detectInfo;
     initParameters.svo_input_filename.set(detectInfo.videoReadPath.c_str());
     initParameters.coordinate_units = UNIT_MILLIMETER;
     initParameters.depth_mode = DEPTH_MODE_ULTRA; // Use ULTRA depth mode
     initParameters.enable_right_side_measure = true;
-    //initParameters.camera_resolution = RESOLUTION_HD2K;
-    //initParameters.camera_resolution = RESOLUTION_HD1080;
-	initParameters.camera_resolution = RESOLUTION_HD720 ;
+    switch (detectInfo.resolution)
+    {
+    case 0:
+        initParameters.camera_resolution = RESOLUTION_HD720;
+        break;
+    case 1:
+        initParameters.camera_resolution = RESOLUTION_HD1080;
+        break;
+    case 2:
+        initParameters.camera_resolution = RESOLUTION_HD2K;
+        break;
+    default:
+        initParameters.camera_resolution = RESOLUTION_HD1080;
+        break;
+    }
     initParameters.camera_fps = 1;
     initParameters.input.setFromSerialNumber(detectInfo.camera_sn);
-    if (!processor.zedOpen(initParameters))
+    if (!processor->zedOpen(initParameters))
     {
-        printf("zed open success sn:%d or video path:%s\n",
+        printf("%s zed open success sn:%d or video path:%s\n", getTime().c_str(),
             detectInfo.camera_sn, detectInfo.videoReadPath.c_str());
         cv::Mat image;
-        processor.zedImageGet(image, VIEW_LEFT);
-        processor.roiSelect(image, detectInfo.roi_x, detectInfo.roi_y, detectInfo.roi_height, 
+        processor->zedImageGet(image, VIEW_LEFT);
+        processor->roiSelect(image, detectInfo.roi_x, detectInfo.roi_y, detectInfo.roi_height, 
             detectInfo.roi_width);
+        cameraRunNum ++;
+       
+        image.release();
     }
     else
     {

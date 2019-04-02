@@ -3,6 +3,7 @@
 
 zedImage::zedImage()
 {
+	cameraStatus = false;
 }
 
 
@@ -26,6 +27,13 @@ void zedImage::init()
 }
 int  zedImage::zedOpen(InitParameters initParameters)
 {
+	printf("%s cameraStatus = %s\r\n", __PRETTY_FUNCTION__, cameraStatus ? "true" : "false");
+	if (cameraStatus)
+	{
+		std::cout << "Camera " << detectInfo.camera_sn << " has already been opened, Now return ." << endl;
+		return 0;
+	}
+		
 	ERROR_CODE err = zed.open(initParameters);
 	if (err != SUCCESS)
 	{
@@ -33,6 +41,7 @@ int  zedImage::zedOpen(InitParameters initParameters)
 		zed.close();
 		return 1;
 	}
+	cameraStatus = true;
 	zed.setCameraSettings(CAMERA_SETTINGS_EXPOSURE, 50, true);
 
 	init();
@@ -45,6 +54,7 @@ int  zedImage::zedOpen(InitParameters initParameters)
 int  zedImage::zedClose()
 {
 	zed.close();
+	cameraStatus = false;
 	return 0;
 }
 int zedImage::zedImageGet(cv::Mat& image, int type)
@@ -71,16 +81,20 @@ int zedImage::zedImageGet(cv::Mat& image, int type)
 		return 1;
 
 }
-int zedImage::templateImageLoad(std::string imageName)
+int zedImage::templateImageLoad(/*std::vector<std::string> imageName*/)
 {
-	templateImage = cv::imread(imageName);
-	if (templateImage.empty())
+	std::vector<std::string>  &imageName = detectInfo.templatePath;
+	for (unsigned int index = 0; index < imageName.size(); index++)
 	{
-		printf("template image read failed!\n");
-		return 1;
+		templateImage = cv::imread(imageName[index]);
+		if (templateImage.empty())
+		{
+			printf("template image read failed %s!\n", imageName[index].c_str());
+			return 1;
+		}
+		else
+			matchInfo.templateImg.push_back(templateImage);
 	}
-	else
-		return 0;
 }
 
 int zedImage::zed_match(std::vector<cv::Mat>& imgPro)
@@ -91,7 +105,6 @@ int zedImage::zed_match(std::vector<cv::Mat>& imgPro)
 		return 1;
 	}
 	Finder.matchMethod = 5;
-	templateImage.copyTo(matchInfo.templateImg);
 	Finder.on_Matching(0, &matchInfo, imgPro);
 }
 
@@ -105,7 +118,7 @@ int zedImage::measure(sl::float4& point3D,cv::Mat image)
 		int xEnd = xBegin + matchInfo.roiFind.width;
 		int yEnd = yBeign + matchInfo.roiFind.height;
 		bool firstPoint = true;
-		for (int i = xBegin + 10; i < xEnd - 10; i += 5)
+		for (int i = xBegin + 10; i < xEnd - 10; i += detectInfo.nDetectStep)
 		{
 			cv::Point pointDepth = cv::Point(i, (yBeign + yEnd) / 2);
 			sl::float4 pointG;
@@ -144,7 +157,7 @@ void  zedImage::roiSelect(cv::Mat img, float x, float y, float height, float wid
 	matchInfo.roiSet.width = img.cols * width;
 	matchInfo.roiSet.height = img.rows * height;
 	printf("roi set x:%d y:%d width:%d height:%d \n",matchInfo.roiSet.x,matchInfo.roiSet.y,
-		matchInfo.roiSet.height,matchInfo.roiSet.width);
+		matchInfo.roiSet.width,matchInfo.roiSet.height);
 }
 
 cv::Mat zedImage::slMat2cvMat(sl::Mat &input) {

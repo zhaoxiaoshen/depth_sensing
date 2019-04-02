@@ -10,6 +10,36 @@
 #include "lockFinder.h"
 using namespace sl;
 using namespace std;
+
+typedef struct detectInfoSt{
+
+	int  nInstalledPos;	// 安装位置，1为海侧，0为陆侧	
+	float roi_x;
+	float roi_y;
+	float roi_width;
+	float roi_height; //图像百分比
+	int camera_sn;
+
+	std::vector<std::string> templatePath;
+	std::string videoReadPath;
+	float result[3]; //cloudPoint xyz
+	float calibratePos[3];//校准位置 xyz
+	int db;
+	int address_r;
+	int offset_r;
+	int len_r;
+	int address_w;
+	int offset_w;
+	int len_w;
+	float distance[3];
+	int nDetectStep;
+	/* bool cameraStatus;*/
+	int resolution;
+	int address_s; //测量状态
+	int offset_s;
+}detectInfoSt;
+
+
 class zedImage
 {
 public:
@@ -28,7 +58,10 @@ public:
 	lockFinder Finder;
 	matchInfoSt matchInfo;
 	cv::Mat srcImage, templateImage;
-
+	detectInfoSt detectInfo;
+	bool getCameraStatus(){ return cameraStatus; };
+private:
+	bool cameraStatus;
 	//==mesure
 	
 public:
@@ -40,7 +73,7 @@ public:
 	void roiSelect(cv::Mat img);
 	void roiSelect(cv::Mat img, float x, float y, float height, float width);
 
-	int templateImageLoad(std::string imageName);
+	int templateImageLoad(/*std::vector<std::string> imageName*/);
 	int zed_match(std::vector<cv::Mat>& imgPro);
 	int measure(sl::float4& point3D,cv::Mat image);
 

@@ -97,94 +97,114 @@ void on_mouse(int event, int x, int y, int flags, void *roi)
 	}
 }
 
+void match(cv::Mat src_img, cv::Mat match_img, double& value, cv::Point& point)
+{ 
+	cv::Mat g_resultImage;
+	int resultImage_cols = src_img.cols - match_img.cols + 1;
+	int resultImage_rows = src_img.rows - match_img.rows + 1;
+ 	g_resultImage.create(resultImage_cols, resultImage_rows, CV_32FC1);
+
+	//【3】进行匹配和标准化
+	//cv::imshow("template", templateImage);
+	cv::cvtColor(src_img, src_img, CV_RGB2GRAY);
+	cv::cvtColor(match_img, match_img, CV_RGB2GRAY);
+	cv::equalizeHist(src_img, src_img);
+	cv::equalizeHist(match_img, match_img);
+	matchTemplate(src_img, match_img, g_resultImage, 5);
+
+	double minValue = 0;
+	double maxValue = 0;
+	cv::Point minLocation; cv::Point maxLocation;
+	cv::Point matchLocation;
+	cv::minMaxLoc(g_resultImage, &minValue, &maxValue, &minLocation, &maxLocation, cv::Mat());
+	matchLocation = maxLocation;
+	point = matchLocation;
+	value = maxValue;
+
+}
+
 void lockFinder::on_Matching(int, void* info,std::vector<cv::Mat>& imgPro)
 {
 	matchInfoSt* matchInfo = (matchInfoSt*)info;
-	//【1】给局部变量初始化
-	//Mat srcImage;
-	//g_srcImage.copyTo(srcImage);
 	cv::Mat srcImageS, srcImage;
 	matchInfo->srcImg.copyTo(srcImage);
 	matchInfo->srcImg.copyTo(srcImageS);
-	cv::Mat templateImage;
-	matchInfo->templateImg.copyTo(templateImage);
-	
+
 	cv::Mat imageShowRoi;
 	srcImage.copyTo(imageShowRoi);
 	cv::rectangle(imageShowRoi, cv::Point(matchInfo->roiSet.x, matchInfo->roiSet.y),
 		cv::Point(matchInfo->roiSet.x + matchInfo->roiSet.width, matchInfo->roiSet.y + matchInfo->roiSet.height),
 		cv::Scalar(0, 0, 255), 2, 8, 0);
 	//cv::imwrite("roi_set.jpg",imageShowRoi);
-	
 	srcImage = srcImage(matchInfo->roiSet);
-	cv::imwrite("roi_imag.jpg",srcImage);
-	//【2】初始化用于结果输出的矩阵
-	cv::Mat g_resultImage;
-	int resultImage_cols = srcImage.cols - templateImage.cols + 1;
-	int resultImage_rows = srcImage.rows - templateImage.rows + 1;
-	if(resultImage_cols<=0||resultImage_rows<=0)
+	cv::imwrite("roi_imag.jpg", srcImage);
+	
+	cv::Mat templateImage;
+	double scoreMax = 0;
+	cv::Point pointMax;
+	cv::Point matchLocation;
+	unsigned int templateIndex = 0;	
+	cv::Rect lockRoi;
+	int matchIndex = 0;
+	if (!matchInfo->templateImg.size())
 	{
-		printf("roi set error or template image is too big!\n");
+		printf("no template image \n");
 		return;
 	}
-	g_resultImage.create(resultImage_cols, resultImage_rows, CV_32FC1);
-
-	//【3】进行匹配和标准化
-	cv::cvtColor(srcImage, srcImage, CV_RGB2GRAY);
-	cv::cvtColor(templateImage, templateImage, CV_RGB2GRAY);
-	cv::equalizeHist(srcImage, srcImage);
-	equalizeHist(templateImage, templateImage);
-	matchTemplate(srcImage, templateImage, g_resultImage, matchMethod);
-	cv::normalize(g_resultImage, g_resultImage, 0, 1, cv::NORM_MINMAX, -1, cv::Mat());
-
-	//【4】通过函数 minMaxLoc 定位最匹配的位置
-	double minValue; double maxValue; cv::Point minLocation; cv::Point maxLocation;
-	cv::Point matchLocation;
-	cv::minMaxLoc(g_resultImage, &minValue, &maxValue, &minLocation, &maxLocation, cv::Mat());
-
-	//【5】对于方法 SQDIFF 和 SQDIFF_NORMED, 越小的数值有着更高的匹配结果. 而其余的方法, 数值越大匹配效果越好
-	//此句代码的OpenCV2版为：
-	//if( g_nMatchMethod  == CV_TM_SQDIFF || g_nMatchMethod == CV_TM_SQDIFF_NORMED )
-	//此句代码的OpenCV3版为：
-	if (matchMethod == CV_TM_SQDIFF || matchMethod == CV_TM_SQDIFF_NORMED)
+	do
 	{
-		matchLocation = minLocation;
-	}
-	else
-	{
-		matchLocation = maxLocation;
-	}
-
-	//【6】绘制出矩形，并显示最终结果
-	cv::rectangle(srcImage, matchLocation, cv::Point(matchLocation.x + templateImage.cols, matchLocation.y + templateImage.rows), cv::Scalar(0, 0, 255), 2, 8, 0);
-	cv::rectangle(g_resultImage, matchLocation, cv::Point(matchLocation.x + templateImage.cols, matchLocation.y + templateImage.rows), cv::Scalar(0, 0, 255), 2, 8, 0);
-
-	cv::imwrite("match-src.jpg",srcImage);
-	//cv::imshow("match-src", srcImage);
-	//cv::waitKey(2);
-
-	//cv::imshow("match-result", g_resultImage);
-	//cv::waitKey(2);
+		double score;
+		matchInfo->templateImg[templateIndex].copyTo(templateImage);
+		cv::Point point;
+		match(srcImage.clone(), templateImage, score, point);
+		if (score > scoreMax)
+		{
+			matchLocation = point;
+			scoreMax = score;
+			matchIndex = templateIndex;
+			lockRoi.x = matchLocation.x;
+			lockRoi.y = matchLocation.y;
+			lockRoi.width = templateImage.cols;
+			lockRoi.height = templateImage.rows;
+		}
+		templateIndex++;
+	} while (templateIndex < matchInfo->templateImg.size());
+	printf("match info, template index: %d score: %f \n", matchIndex, scoreMax);
 
 	//====
-	cv::Rect lockRoi;
-	lockRoi.x = matchLocation.x;
-	lockRoi.y = matchLocation.y;
-	lockRoi.width = templateImage.cols;
-	lockRoi.height = templateImage.rows;
 	matchInfo->roiFind = lockRoi;
 	//== proccess
-	cv::Mat lockB;
-	srcImageS.copyTo(lockB);
-	lockB = lockB(matchInfo->roiSet);
-	lockRoi.x -= 70; lockRoi.y -= 50; lockRoi.height += 150; lockRoi.width += 150;
-	lockRoi.x = lockRoi.x > 0 ? lockRoi.x : 1; lockRoi.y = lockRoi.y > 0 ? lockRoi.y : 1; 
-	lockRoi.height = lockRoi.height < (lockB.rows - lockRoi.y) ? lockRoi.height : (lockB.rows - lockRoi.y);
-	lockRoi.width = lockRoi.width < (lockB.cols - lockRoi.x) ? lockRoi.width : (lockB.cols - lockRoi.x);
-	lockRoi.width = lockRoi.width > 0 ? lockRoi.width : 0;
-	lockRoi.height = lockRoi.height > 0 ? lockRoi.height : 0;
-	lockB = lockB(lockRoi);
-	lockProcess(lockB, lockRoi,imgPro);
+	// cv::Mat lockB,lockT;
+	// srcImageS.copyTo(lockB);
+	// //==lockroi
+	// srcImageS = srcImageS(matchInfo->roiSet);
+	// srcImageS.copyTo(lockT);
+	// lockT = lockT(matchInfo->roiFind);
+	// //cv::imshow("lockT", lockT);
+
+	//===update teamplate;
+	//if (maxValue > 0.80)
+	//{
+	//	lockT.copyTo(matchInfo->templateImg);
+	//}
+	//else if(maxValue<0.7)
+	//{
+	//	matchInfo->roiFind.x = 0;
+	//	matchInfo->roiFind.y = 0;
+	//	matchInfo->roiFind.width = 0;
+	//	matchInfo->roiFind.height = 0;
+	//}
+	//== proccess
+	// srcImageS.copyTo(lockB);
+	// lockB = lockB(matchInfo->roiSet);
+	// lockRoi.x -= 70; lockRoi.y -= 50; lockRoi.height += 150; lockRoi.width += 150;
+	// lockRoi.x = lockRoi.x > 0 ? lockRoi.x : 1; lockRoi.y = lockRoi.y > 0 ? lockRoi.y : 1; 
+	// lockRoi.height = lockRoi.height < (lockB.rows - lockRoi.y) ? lockRoi.height : (lockB.rows - lockRoi.y);
+	// lockRoi.width = lockRoi.width < (lockB.cols - lockRoi.x) ? lockRoi.width : (lockB.cols - lockRoi.x);
+	// lockRoi.width = lockRoi.width > 0 ? lockRoi.width : 0;
+	// lockRoi.height = lockRoi.height > 0 ? lockRoi.height : 0;
+	// lockB = lockB(lockRoi);
+	// lockProcess(lockB, lockRoi,imgPro);
 }
 
 void lockFinder::lockProcess(cv::Mat img, cv::Rect& rect,std::vector<cv::Mat>&imgPro)

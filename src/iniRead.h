@@ -31,19 +31,23 @@ public:
  
     // 析够函数
     virtual ~CIni();
+	bool 	m_bOutput;
 public:
+	
     //获取主键下的所有字符串
     INI_RES GetSection(const char *mAttr, std::vector<std::string>& section);
     //获取整形的键值
-    int  GetInt(const char* mAttr, const char* cAttr );
+    int  GetInt(const char* szSection, const char* szKey );
     //获取浮点型键值
-    float GetFloat(const char *mAttr, const char *cAttr);
+	float GetFloat(const char *szSection, const char *szKey);
     //获取键值的字符串
-    char *GetStr(const char* mAttr, const char* cAttr );
+	char *GetStr(const char* szSection, const char* szKey);
     // 打开config 文件
     INI_RES OpenFile(const char* pathName);
     // 关闭config 文件
     INI_RES CloseFile();
+	void EnableOuput(bool bFlag);
+	void OutputAll();
 protected:
     // 读取config文件
     INI_RES GetKey(const char* mAttr, const char* cAttr, char* value);

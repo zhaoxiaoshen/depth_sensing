@@ -1,9 +1,11 @@
 #pragma once
+#include <map>
 #include <opencv2/opencv.hpp>
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
 #include <iostream>
 //using namespace cv;
+using namespace std;
 
 #define CV_EVENT_FLAG_LBUTTON 1           //×ó¼üÍÏ×§  
 #define CV_EVENT_FLAG_RBUTTON 2           //ÓÒ¼üÍÏ×§  
@@ -14,7 +16,7 @@
 
 typedef struct matchInfoSt {
 	cv::Mat srcImg;
-	cv::Mat templateImg;
+	vector<cv::Mat> templateImg;
 	cv::Rect roiSet;
 	cv::Rect roiFind;
 }matchInfoSt;

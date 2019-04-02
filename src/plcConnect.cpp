@@ -45,7 +45,7 @@ int plcConnect(std::string m_strIp)
 int dataRead(int DBnum, int start, int len, void *buffer)
 {
    int res = daveReadManyBytes(_dc, daveDB, DBnum, start, len, buffer);
-    return res;
+   return res;
 }
 
 int dataWrite(int DBnum, int start, int len, void *buffer)

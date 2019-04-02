@@ -1,0 +1,13 @@
+2019.04.02 
+1.修改配置General.ini文件结构，增加Config节，以增加配置灵活性
+[Config]
+Camera1=Config-18712.ini
+Camera2=Config-12224.ini
+
+2.删除全局变量std::vector<detectInfoSt> detectInfoVec,财在zedImage类中增加变量：detectInfoSt detectInfo;
+
+3.删除detectInfoSt结构体中的cameraStatus变量，移动到zedImage类中，zedImage::cameraStatus变量只允许在zedImage::Open和zedImage::Close中修改，外部读取该变量必须调用zedImage::getCameraStatus函数。
+
+4.修改zedImage::Open函数，当zedImage::cameraStatus为true时，直接返回0;
+
+5.屏蔽main.cpp的306行，cameraClose(cameraIndex);

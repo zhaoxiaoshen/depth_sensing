@@ -81,9 +81,9 @@ int zedImage::zedImageGet(cv::Mat& image, int type)
 		return 1;
 
 }
-int zedImage::templateImageLoad(/*std::vector<std::string> imageName*/)
+int zedImage::templateImageLoad(std::vector<std::string> imageName, std::vector<cv::Mat> &templateImg)
 {
-	std::vector<std::string>  &imageName = detectInfo.templatePath;
+	//std::vector<std::string>  &imageName = detectInfo.templatePath;
 	for (unsigned int index = 0; index < imageName.size(); index++)
 	{
 		templateImage = cv::imread(imageName[index]);
@@ -93,8 +93,33 @@ int zedImage::templateImageLoad(/*std::vector<std::string> imageName*/)
 			return 1;
 		}
 		else
-			matchInfo.templateImg.push_back(templateImage);
+			templateImg.push_back(templateImage);
+			//matchInfo.templateImg.push_back(templateImage);
 	}
+}
+
+int zedImage::matchTwice()
+{
+	cv::Rect roiLock;
+	// 1. get lock location
+	Finder.onMatch(0, &matchInfo, matchInfo.roiSet, roiLock, matchInfo.templateImg);
+	
+	// 2. get right hole
+	cv::Rect roiSet = roiLock;
+	roiSet.width = roiSet.width/2;
+	cv::Rect roiHole;
+	matchInfo.multiRoi.clear();
+	Finder.onMatch(0, &matchInfo, roiSet, roiHole, matchInfo.secondTemplateImg);
+	matchInfo.multiRoi.push_back(roiHole);
+	
+	// 3. get left hole
+	roiSet = roiLock;
+	roiSet.width = roiSet.width/2;
+	roiSet.x += roiSet.width;
+	Finder.onMatch(0, &matchInfo, roiSet, roiHole, matchInfo.secondTemplateImg);
+	matchInfo.multiRoi.push_back(roiHole);
+
+	return 0;
 }
 
 int zedImage::zed_match(std::vector<cv::Mat>& imgPro)
@@ -105,11 +130,79 @@ int zedImage::zed_match(std::vector<cv::Mat>& imgPro)
 		return 1;
 	}
 	Finder.matchMethod = 5;
-	Finder.on_Matching(0, &matchInfo, imgPro);
+	if (detectInfo.method == MATCH_TWICE)
+	{
+		matchTwice();
+	} else {
+		Finder.on_Matching(0, &matchInfo, imgPro);
+	}
+}
+
+int zedImage::measureHole(sl::float4& point3D,cv::Mat image)
+{
+	sl::Mat point_cloud;
+	sl::Mat confidence_map;
+	if (zed.retrieveMeasure(point_cloud, MEASURE_XYZRGBA, MEM_GPU, width, height) == SUCCESS)
+	{
+		if (zed.retrieveMeasure(confidence_map,MEASURE_CONFIDENCE, MEM_GPU, width, height) != SUCCESS)
+		{
+			printf("get confidence error\n");
+			return -1;
+		}
+		bool firstPoint = true;
+		float confidenceAvg = 0;
+		for (unsigned int roiIndex = 0; roiIndex < matchInfo.multiRoi.size(); roiIndex++)
+		{
+			cv::Rect location = matchInfo.multiRoi[roiIndex];
+			int xBegin = location.x;
+			int yBeign = location.y;
+			int xEnd = xBegin + location.width;
+			int yEnd = yBeign + location.height;
+			for (int i = xBegin + 5; i < xEnd - 5; i += detectInfo.nDetectStep)
+			{	
+				cv::Point pointDepth = cv::Point(i, (yBeign + yEnd) / 2);			
+				float confidenceValue;
+				ERROR_CODE rect = confidence_map.getValue(pointDepth.x, pointDepth.y, &confidenceValue, MEM_GPU);
+				if (rect != SUCCESS)
+					continue;
+
+				sl::float4 pointG;
+				rect = point_cloud.getValue(pointDepth.x, pointDepth.y, &pointG, MEM_GPU);
+				if (rect == SUCCESS)
+				{
+					if (firstPoint)
+					{
+						firstPoint = false;
+						point3D = pointG;
+						confidenceAvg = confidenceValue;
+						continue;
+					}
+					point3D.x = (point3D.x + pointG.x) / 2.0;
+					point3D.y = (point3D.y + pointG.y) / 2.0;
+					point3D.z = (point3D.z + pointG.z) / 2.0;
+
+					confidenceAvg = (confidenceAvg + confidenceValue) / 2.0;
+					//printf("index:%d %d-%d-%f_%f_%f\n", svo_position, pointDepth.x, pointDepth.y, point3D.x, point3D.y, point3D.z);
+					cv::circle(image, pointDepth, 2, cv::Scalar(0, 0, 255), 2, 8, 0);
+					//cv::imshow("point3D", leftImg);
+					//cv::waitKey(2);
+				}
+			}
+			char name[255] = {0};
+			snprintf(name, sizeof(name)-1, "point3D_%d.jpg", roiIndex);
+			cv::imwrite(name,image);
+			printf("the hole average confidence %f \n", confidenceAvg);
+		}
+	}
 }
 
 int zedImage::measure(sl::float4& point3D,cv::Mat image)
 {
+	if (detectInfo.method = MATCH_TWICE)
+	{
+		measureHole(point3D, image);
+		return 0;
+	}	
 	sl::Mat point_cloud;
 	if (zed.retrieveMeasure(point_cloud, MEASURE_XYZRGBA, MEM_GPU, width, height) == SUCCESS)
 	{

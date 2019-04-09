@@ -17,8 +17,10 @@ using namespace std;
 typedef struct matchInfoSt {
 	cv::Mat srcImg;
 	vector<cv::Mat> templateImg;
+	vector<cv::Mat> secondTemplateImg;
 	cv::Rect roiSet;
 	cv::Rect roiFind;
+	std::vector<cv::Rect> multiRoi;
 }matchInfoSt;
  
 static cv::Mat srcF,tmpF;
@@ -34,6 +36,7 @@ public:
 	int matchMethod;
 public:
 	void roiSet(cv::Mat imgSrc, cv::Rect& roi);
+	void onMatch(int func, void *info, cv::Rect roiSet, cv::Rect &roiFind, std::vector<cv::Mat> templateVec);
 	void on_Matching(int, void* info, std::vector<cv::Mat>& imgPro);
 	void lockProcess(cv::Mat img, cv::Rect& rect, std::vector<cv::Mat>&imgPro);
 	

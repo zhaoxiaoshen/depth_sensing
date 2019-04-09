@@ -123,6 +123,58 @@ void match(cv::Mat src_img, cv::Mat match_img, double& value, cv::Point& point)
 
 }
 
+void lockFinder::onMatch(int func, void *info, cv::Rect roiSet, cv::Rect &roiFind, std::vector<cv::Mat> templateVec)
+{
+	matchInfoSt* matchInfo = (matchInfoSt*)info;
+	cv::Mat srcImageS, srcImage;
+	matchInfo->srcImg.copyTo(srcImage);
+	matchInfo->srcImg.copyTo(srcImageS);
+
+	cv::Mat imageShowRoi;
+	srcImage.copyTo(imageShowRoi);
+	cv::rectangle(imageShowRoi, cv::Point(roiSet.x, roiSet.y),cv::Point(roiSet.x + roiSet.width, roiSet.y + roiSet.height),
+		cv::Scalar(0, 0, 255), 2, 8, 0);
+	//cv::imwrite("roi_set.jpg",imageShowRoi);
+	srcImage = srcImage(roiSet);
+	cv::imwrite("roi_imag.jpg", srcImage);
+	
+	cv::Mat templateImage;
+	double scoreMax = 0;
+	cv::Point pointMax;
+	cv::Point matchLocation;
+	unsigned int templateIndex = 0;	
+	cv::Rect lockRoi = roiSet;
+	int matchIndex = 0;
+	if (!templateVec.size())
+	{
+		printf("no template image \n");
+		return;
+	}
+	do
+	{
+		double score;
+		templateVec[templateIndex].copyTo(templateImage);
+		cv::Point point;
+		match(srcImage.clone(), templateImage, score, point);
+		if (score > scoreMax)
+		{
+			matchLocation = point;
+			scoreMax = score;
+			matchIndex = templateIndex;
+			lockRoi.x = matchLocation.x;
+			lockRoi.y = matchLocation.y;
+			lockRoi.width = templateImage.cols;
+			lockRoi.height = templateImage.rows;
+		}
+		templateIndex++;
+	} while (templateIndex < templateVec.size());
+	printf("match info, template index: %d score: %f \n", matchIndex, scoreMax);
+
+	//====
+	roiFind.x = lockRoi.x + roiSet.x;
+	roiFind.y = lockRoi.y + roiSet.y;
+}
+
 void lockFinder::on_Matching(int, void* info,std::vector<cv::Mat>& imgPro)
 {
 	matchInfoSt* matchInfo = (matchInfoSt*)info;

@@ -101,6 +101,8 @@ static void  configInit(detectInfoSt& detectInfo, CIni& iniFile)
 	printf("%s\n", __PRETTY_FUNCTION__);
 	detectInfo.camera_sn = iniFile.GetInt("CAMERA", "sn");
 	printf("Camera SN = %d.\n", detectInfo.camera_sn);
+    detectInfo.method = iniFile.GetInt("ALGO_SELECT", "algo");
+    printf("algo select: %d\n", detectInfo.method);
     detectInfo.roi_x = iniFile.GetFloat("ROI_SET", "x");
     detectInfo.roi_y = iniFile.GetFloat("ROI_SET", "y");
     detectInfo.roi_height = iniFile.GetFloat("ROI_SET", "height");
@@ -113,6 +115,15 @@ static void  configInit(detectInfoSt& detectInfo, CIni& iniFile)
     for (unsigned int i = 0; i < detectInfo.templatePath.size(); i++)
     {
         printf("template image: %s \n", detectInfo.templatePath[i].c_str());
+    }
+    if (detectInfo.method == MATCH_TWICE)
+    {
+        iniFile.GetSection("SECOND_TEMPLATE_IMAGE", detectInfo.secondTemplatePath);
+        printf("Template Array Size = %d.\n", (int)detectInfo.secondTemplatePath.size());
+        for (unsigned int i = 0; i < detectInfo.secondTemplatePath.size(); i++)
+        {
+            printf("template image: %s \n", detectInfo.secondTemplatePath[i].c_str());
+        }
     }
     //detectInfo.camera_sn = 12224;
 	//detectInfo.camera_sn = 18711;
@@ -352,9 +363,8 @@ int main(int argc, char **argv)
         return -1;
     }
 	plcIp = iniFile.GetStr("PLC", "ip");
-	printf("camera num:%d plc ip:%s \n", cameraNum, plcIp.c_str());
-    
-	cameraNum = iniFile.GetInt("CAMERA", "num");	
+	cameraNum = iniFile.GetInt("CAMERA", "num");
+    printf("camera num:%d plc ip:%s \n", cameraNum, plcIp.c_str());
 	if (cameraNum > 0)
 	{
 		std::vector<std::string> vecCameraConfig;
@@ -375,7 +385,14 @@ int main(int argc, char **argv)
 			{
 				zedImage* zedProcessor = new zedImage();
 				configInit(zedProcessor->detectInfo, iniFile);
-				zedProcessor->templateImageLoad(/*detectInfo.templatePath*/);
+                zedProcessor->templateImageLoad(zedProcessor->detectInfo.templatePath,
+                    zedProcessor->matchInfo.templateImg);
+                if (zedProcessor->detectInfo.method == 2)
+                {
+                    zedProcessor->templateImageLoad(zedProcessor->detectInfo.secondTemplatePath,
+                    zedProcessor->matchInfo.secondTemplateImg);
+                }
+				//zedProcessor->templateImageLoad(/*detectInfo.templatePath*/);
 				//cameraOpen(*zedProcessor, i); //"" for live
 				zedProcessorVec.push_back(zedProcessor);
 				zedProcessorVec[i]->zedClose();

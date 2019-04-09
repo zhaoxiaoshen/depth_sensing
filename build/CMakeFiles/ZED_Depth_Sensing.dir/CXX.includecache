@@ -145,6 +145,8 @@ iostream
 -
 sstream
 -
+stdio.h
+-
 opencv2/opencv.hpp
 -
 opencv2/core/core.hpp

@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <stdio.h>
 #include <opencv2/opencv.hpp>
 #include <opencv2/core/core.hpp>  
 #include <opencv2/highgui/highgui.hpp>  
@@ -11,6 +12,7 @@
 using namespace sl;
 using namespace std;
 
+#define   MATCH_TWICE   2
 typedef struct detectInfoSt{
 
 	int  nInstalledPos;	// 安装位置，1为海侧，0为陆侧	
@@ -20,7 +22,9 @@ typedef struct detectInfoSt{
 	float roi_height; //图像百分比
 	int camera_sn;
 
+	int method;
 	std::vector<std::string> templatePath;
+	std::vector<std::string> secondTemplatePath;
 	std::string videoReadPath;
 	float result[3]; //cloudPoint xyz
 	float calibratePos[3];//校准位置 xyz
@@ -73,9 +77,12 @@ public:
 	void roiSelect(cv::Mat img);
 	void roiSelect(cv::Mat img, float x, float y, float height, float width);
 
-	int templateImageLoad(/*std::vector<std::string> imageName*/);
+	int templateImageLoad(std::vector<std::string> imageName, std::vector<cv::Mat> &templateImg);
 	int zed_match(std::vector<cv::Mat>& imgPro);
+	int matchTwice();
+
 	int measure(sl::float4& point3D,cv::Mat image);
+	int measureHole(sl::float4& point3D,cv::Mat image);
 
 };
 

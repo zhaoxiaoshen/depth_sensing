@@ -11,3 +11,17 @@ Camera2=Config-12224.ini
 4.修改zedImage::Open函数，当zedImage::cameraStatus为true时，直接返回0;
 
 5.屏蔽main.cpp的306行，cameraClose(cameraIndex);
+
+
+2019.04.11
+
+1.修改配置文件，支持二次匹配模板的设置。
+	[SECOND_TEMPLATE_IMAGE]
+	path1 = template/hole_L.jpg
+	path2 = template/hole_R.jpg
+	
+2.修改[ALGO_SELECT]字段。当algo选择2时，使用两次匹配方式（第一次匹配锁头；第二次将锁头平均分成两部分，找左右螺丝孔）
+
+3.距离计算为：计算两个螺丝孔位置的所有像素的平均值
+
+Todo: 根据数据判断使用置信度还是距离值来对数据进行筛选

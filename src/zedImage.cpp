@@ -101,23 +101,44 @@ int zedImage::templateImageLoad(std::vector<std::string> imageName, std::vector<
 int zedImage::matchTwice()
 {
 	cv::Rect roiLock;
+	int roiRowOffset = 5;
 	// 1. get lock location
 	Finder.onMatch(0, &matchInfo, matchInfo.roiSet, roiLock, matchInfo.templateImg);
+	cv::Mat imageSave;
+	matchInfo.srcImg.copyTo(imageSave);
+	imageSave = imageSave(roiLock);
+	cv::imwrite("lock.jpg", imageSave);
+	printf("lock roi x:%d y:%d width:%d height:%d \n", roiLock.x, roiLock.y, roiLock.width, roiLock.height);
 	
-	// 2. get right hole
+	// 2. get left hole
 	cv::Rect roiSet = roiLock;
 	roiSet.width = roiSet.width/2;
+	roiSet.y = roiSet.y - roiRowOffset;
+	roiSet.height = roiSet.height + roiRowOffset*2;
 	cv::Rect roiHole;
 	matchInfo.multiRoi.clear();
+	printf("hole find roi x:%d y:%d width:%d height:%d \n", roiSet.x,  roiSet.y,  roiSet.width,  roiSet.height);
 	Finder.onMatch(0, &matchInfo, roiSet, roiHole, matchInfo.secondTemplateImg);
 	matchInfo.multiRoi.push_back(roiHole);
+
+	matchInfo.srcImg.copyTo(imageSave);
+	imageSave = imageSave(roiHole);
+	cv::imwrite("hole_left.jpg", imageSave);
 	
-	// 3. get left hole
+	// 3. get right hole
 	roiSet = roiLock;
 	roiSet.width = roiSet.width/2;
 	roiSet.x += roiSet.width;
+	roiSet.y = roiSet.y - roiRowOffset;
+	roiSet.height = roiSet.height + roiRowOffset*2;
 	Finder.onMatch(0, &matchInfo, roiSet, roiHole, matchInfo.secondTemplateImg);
 	matchInfo.multiRoi.push_back(roiHole);
+
+	matchInfo.srcImg.copyTo(imageSave);
+	imageSave = imageSave(roiHole);
+	cv::imwrite("hole_right.jpg", imageSave);
+	cv::imwrite("hole_right.jpg", imageSave);
+	imageSave.release();
 
 	return 0;
 }
@@ -132,6 +153,7 @@ int zedImage::zed_match(std::vector<cv::Mat>& imgPro)
 	Finder.matchMethod = 5;
 	if (detectInfo.method == MATCH_TWICE)
 	{
+		printf("match twice using\n");
 		matchTwice();
 	} else {
 		Finder.on_Matching(0, &matchInfo, imgPro);
@@ -151,6 +173,7 @@ int zedImage::measureHole(sl::float4& point3D,cv::Mat image)
 		}
 		bool firstPoint = true;
 		float confidenceAvg = 0;
+		printf("multi roi size:%d \n", matchInfo.multiRoi.size());
 		for (unsigned int roiIndex = 0; roiIndex < matchInfo.multiRoi.size(); roiIndex++)
 		{
 			cv::Rect location = matchInfo.multiRoi[roiIndex];
@@ -158,7 +181,8 @@ int zedImage::measureHole(sl::float4& point3D,cv::Mat image)
 			int yBeign = location.y;
 			int xEnd = xBegin + location.width;
 			int yEnd = yBeign + location.height;
-			for (int i = xBegin + 5; i < xEnd - 5; i += detectInfo.nDetectStep)
+			printf("xBegin %d xEnd:%d \n", xBegin, xEnd);
+			for (int i = xBegin ; i < xEnd ; i += detectInfo.nDetectStep)
 			{	
 				cv::Point pointDepth = cv::Point(i, (yBeign + yEnd) / 2);			
 				float confidenceValue;
@@ -198,8 +222,9 @@ int zedImage::measureHole(sl::float4& point3D,cv::Mat image)
 
 int zedImage::measure(sl::float4& point3D,cv::Mat image)
 {
-	if (detectInfo.method = MATCH_TWICE)
+	if (detectInfo.method == MATCH_TWICE)
 	{
+		printf("measure hole … \n");
 		measureHole(point3D, image);
 		return 0;
 	}	

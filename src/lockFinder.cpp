@@ -102,6 +102,8 @@ void match(cv::Mat src_img, cv::Mat match_img, double& value, cv::Point& point)
 	cv::Mat g_resultImage;
 	int resultImage_cols = src_img.cols - match_img.cols + 1;
 	int resultImage_rows = src_img.rows - match_img.rows + 1;
+	//printf("srcimg cols: %d rows: %d  matchimg cols:%d rows:%d \n", src_img.cols, src_img.rows,
+	//	match_img.cols, match_img.rows);
  	g_resultImage.create(resultImage_cols, resultImage_rows, CV_32FC1);
 
 	//【3】进行匹配和标准化
@@ -126,9 +128,8 @@ void match(cv::Mat src_img, cv::Mat match_img, double& value, cv::Point& point)
 void lockFinder::onMatch(int func, void *info, cv::Rect roiSet, cv::Rect &roiFind, std::vector<cv::Mat> templateVec)
 {
 	matchInfoSt* matchInfo = (matchInfoSt*)info;
-	cv::Mat srcImageS, srcImage;
+	cv::Mat srcImage;
 	matchInfo->srcImg.copyTo(srcImage);
-	matchInfo->srcImg.copyTo(srcImageS);
 
 	cv::Mat imageShowRoi;
 	srcImage.copyTo(imageShowRoi);
@@ -171,6 +172,8 @@ void lockFinder::onMatch(int func, void *info, cv::Rect roiSet, cv::Rect &roiFin
 	printf("match info, template index: %d score: %f \n", matchIndex, scoreMax);
 
 	//====
+	roiFind.width = lockRoi.width;
+	roiFind.height = lockRoi.height;
 	roiFind.x = lockRoi.x + roiSet.x;
 	roiFind.y = lockRoi.y + roiSet.y;
 }

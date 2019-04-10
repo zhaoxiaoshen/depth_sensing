@@ -107,6 +107,7 @@ static void  configInit(detectInfoSt& detectInfo, CIni& iniFile)
     detectInfo.roi_y = iniFile.GetFloat("ROI_SET", "y");
     detectInfo.roi_height = iniFile.GetFloat("ROI_SET", "height");
     detectInfo.roi_width = iniFile.GetFloat("ROI_SET", "width");
+    detectInfo.nDetectStep = 1;
 	detectInfo.nDetectStep = iniFile.GetInt("ROI_SET", "Step");
 	printf("%s detect step = %d \r\n", __PRETTY_FUNCTION__, detectInfo.nDetectStep);
     //detectInfo.templatePath = iniFile.GetStr("TEMPLATE_IMAGE", "path");
@@ -193,8 +194,10 @@ void *cameraProcess(void *argv)
     int cameraRunningCount = cameraRunNum;
     printf("\n%s camera running index %d runNum:%d \n", getTime().c_str(),
         cameraIndex, cameraRunningCount);
-	if (!zedProcessor->getCameraStatus())
-	{
+    if (zedProcessor->detectInfo.videoReadPath.length()>0)
+    {
+        printf("get frame from video \n");
+    } else if (!zedProcessor->getCameraStatus()) {
         cameraOpen(zedProcessor, cameraIndex); //"" for live
         usleep(500*1000); //500ms
     }
@@ -387,7 +390,7 @@ int main(int argc, char **argv)
 				configInit(zedProcessor->detectInfo, iniFile);
                 zedProcessor->templateImageLoad(zedProcessor->detectInfo.templatePath,
                     zedProcessor->matchInfo.templateImg);
-                if (zedProcessor->detectInfo.method == 2)
+                if (zedProcessor->detectInfo.method == MATCH_TWICE)
                 {
                     zedProcessor->templateImageLoad(zedProcessor->detectInfo.secondTemplatePath,
                     zedProcessor->matchInfo.secondTemplateImg);
@@ -430,8 +433,11 @@ int main(int argc, char **argv)
                 {
                     zedImage *zedProcessor;
                     zedProcessor = zedProcessorVec[i];
-					if (!zedProcessor->getCameraStatus())
+                    if (zedProcessor->detectInfo.videoReadPath.length()>0)
                     {
+                        printf("read from video \n");
+
+                    } else if (!zedProcessor->getCameraStatus()) {
                         cameraOpen(zedProcessor, i);			//"" for live
                         usleep(500 * 1000);                     //500ms
                     }
